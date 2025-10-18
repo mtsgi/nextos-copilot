@@ -5,6 +5,7 @@ import { WindowState } from '@/types';
 
 interface WindowProps {
   window: WindowState;
+  isMobile: boolean;
   onFocus: () => void;
   onClose: () => void;
   onMinimize: () => void;
@@ -18,6 +19,7 @@ const MIN_WINDOW_HEIGHT = 300;
 
 export default function Window({
   window,
+  isMobile,
   onFocus,
   onClose,
   onMinimize,
@@ -33,6 +35,9 @@ export default function Window({
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      // Disable dragging and resizing on mobile
+      if (isMobile) return;
+
       if (isDragging) {
         const dx = e.clientX - dragStart.x;
         const dy = e.clientY - dragStart.y;
@@ -64,18 +69,19 @@ export default function Window({
         document.removeEventListener('mouseup', handleMouseUp);
       };
     }
-  }, [isDragging, isResizing, dragStart, resizeStart, window.bounds, onUpdateBounds]);
+  }, [isDragging, isResizing, dragStart, resizeStart, window.bounds, onUpdateBounds, isMobile]);
 
   if (window.isMinimized) {
     return null;
   }
 
-  const style: React.CSSProperties = window.isMaximized
+  // On mobile, always show full screen
+  const style: React.CSSProperties = isMobile || window.isMaximized
     ? {
         left: 0,
         top: 0,
         width: '100vw',
-        height: 'calc(100vh - 48px)',
+        height: '100vh',
         zIndex: window.zIndex,
       }
     : {
@@ -89,68 +95,73 @@ export default function Window({
   return (
     <div
       ref={windowRef}
-      className={`absolute flex flex-col bg-white rounded-lg shadow-2xl overflow-hidden transition-shadow ${
-        window.isFocused ? 'ring-2 ring-blue-500' : ''
+      className={`absolute flex flex-col bg-white ${isMobile ? 'rounded-none' : 'rounded-lg'} shadow-2xl overflow-hidden transition-shadow ${
+        window.isFocused && !isMobile ? 'ring-2 ring-blue-500' : ''
       }`}
       style={style}
       onMouseDown={onFocus}
     >
       {/* Title Bar */}
       <div
-        className={`flex items-center justify-between px-4 py-2 ${
+        className={`flex items-center justify-between px-4 py-3 ${isMobile ? 'py-4' : 'py-2'} ${
           window.isFocused ? 'bg-gradient-to-r from-blue-500 to-blue-600' : 'bg-gray-400'
-        } text-white cursor-move select-none`}
+        } text-white ${!isMobile && 'cursor-move'} select-none`}
         onMouseDown={(e) => {
-          if (!window.isMaximized) {
+          if (!window.isMaximized && !isMobile) {
             setIsDragging(true);
             setDragStart({ x: e.clientX, y: e.clientY });
           }
           onFocus();
         }}
-        onDoubleClick={onMaximize}
+        onDoubleClick={() => !isMobile && onMaximize()}
       >
         <div className="flex items-center gap-2 flex-1 min-w-0">
-          <span className="text-sm font-medium truncate">{window.title}</span>
+          <span className={`${isMobile ? 'text-base' : 'text-sm'} font-medium truncate`}>{window.title}</span>
         </div>
         <div className="flex items-center gap-2">
+          {/* Hide minimize/maximize on mobile */}
+          {!isMobile && (
+            <>
+              <button
+                className="w-6 h-6 rounded hover:bg-white/20 flex items-center justify-center transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onMinimize();
+                }}
+                title="Minimize"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                </svg>
+              </button>
+              <button
+                className="w-6 h-6 rounded hover:bg-white/20 flex items-center justify-center transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onMaximize();
+                }}
+                title="Maximize"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                  />
+                </svg>
+              </button>
+            </>
+          )}
           <button
-            className="w-6 h-6 rounded hover:bg-white/20 flex items-center justify-center transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              onMinimize();
-            }}
-            title="Minimize"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-            </svg>
-          </button>
-          <button
-            className="w-6 h-6 rounded hover:bg-white/20 flex items-center justify-center transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              onMaximize();
-            }}
-            title="Maximize"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-              />
-            </svg>
-          </button>
-          <button
-            className="w-6 h-6 rounded hover:bg-red-500 flex items-center justify-center transition-colors"
+            className={`${isMobile ? 'w-8 h-8' : 'w-6 h-6'} rounded hover:bg-red-500 flex items-center justify-center transition-colors`}
             onClick={(e) => {
               e.stopPropagation();
               onClose();
             }}
             title="Close"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className={`${isMobile ? 'w-5 h-5' : 'w-4 h-4'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -160,8 +171,8 @@ export default function Window({
       {/* Window Content */}
       <div className="flex-1 overflow-auto bg-white">{children}</div>
 
-      {/* Resize Handle */}
-      {!window.isMaximized && (
+      {/* Resize Handle - Hidden on mobile */}
+      {!window.isMaximized && !isMobile && (
         <div
           className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
           onMouseDown={(e) => {
