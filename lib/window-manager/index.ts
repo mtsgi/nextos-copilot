@@ -1,5 +1,9 @@
 import { WindowState, Bounds } from '@/types';
 
+const INITIAL_WINDOW_OFFSET_X = 100;
+const INITIAL_WINDOW_OFFSET_Y = 100;
+const WINDOW_CASCADE_OFFSET = 30;
+
 export class WindowManager {
   private windows: Map<string, WindowState> = new Map();
   private listeners: Set<() => void> = new Set();
@@ -17,8 +21,8 @@ export class WindowManager {
   createWindow(appId: string, title: string, bounds?: Partial<Bounds>): string {
     const id = crypto.randomUUID();
     const defaultBounds: Bounds = {
-      x: 100 + (this.windows.size * 30),
-      y: 100 + (this.windows.size * 30),
+      x: INITIAL_WINDOW_OFFSET_X + (this.windows.size * WINDOW_CASCADE_OFFSET),
+      y: INITIAL_WINDOW_OFFSET_Y + (this.windows.size * WINDOW_CASCADE_OFFSET),
       width: 800,
       height: 600,
       ...bounds,

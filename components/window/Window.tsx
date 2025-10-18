@@ -13,6 +13,9 @@ interface WindowProps {
   children: React.ReactNode;
 }
 
+const MIN_WINDOW_WIDTH = 400;
+const MIN_WINDOW_HEIGHT = 300;
+
 export default function Window({
   window,
   onFocus,
@@ -42,8 +45,8 @@ export default function Window({
         const dx = e.clientX - resizeStart.x;
         const dy = e.clientY - resizeStart.y;
         onUpdateBounds({
-          width: Math.max(400, resizeStart.width + dx),
-          height: Math.max(300, resizeStart.height + dy),
+          width: Math.max(MIN_WINDOW_WIDTH, resizeStart.width + dx),
+          height: Math.max(MIN_WINDOW_HEIGHT, resizeStart.height + dy),
         });
       }
     };

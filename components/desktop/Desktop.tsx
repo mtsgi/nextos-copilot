@@ -37,6 +37,16 @@ const applications: Application[] = [
 export default function Desktop() {
   const [windows, setWindows] = useState<WindowState[]>([]);
   const [initialized, setInitialized] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    // Update clock every second
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     // Initialize filesystem on mount
@@ -78,7 +88,7 @@ export default function Desktop() {
   return (
     <div className="h-screen w-screen flex flex-col bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 overflow-hidden">
       {/* Desktop Icons */}
-      <div className="flex-1 p-8 grid grid-cols-auto-fit gap-6 content-start">
+      <div className="flex-1 p-8 grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-6 content-start">
         {applications.map((app) => (
           <button
             key={app.id}
@@ -156,7 +166,7 @@ export default function Desktop() {
 
         {/* System Tray */}
         <div className="flex items-center gap-2 text-white text-sm">
-          <div>{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+          <div>{currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
         </div>
       </div>
     </div>
