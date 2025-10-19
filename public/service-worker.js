@@ -67,8 +67,17 @@ self.addEventListener('fetch', (event) => {
           // Define cacheable file extensions
           const cacheableExtensions = new Set(['.svg', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.css', '.js']);
           const url = new URL(event.request.url);
-          const shouldCache = url.pathname.includes('/_next/') || 
-            Array.from(cacheableExtensions).some(ext => url.pathname.endsWith(ext));
+          
+          // Check if URL should be cached
+          let shouldCache = url.pathname.includes('/_next/');
+          if (!shouldCache) {
+            for (const ext of cacheableExtensions) {
+              if (url.pathname.endsWith(ext)) {
+                shouldCache = true;
+                break;
+              }
+            }
+          }
           
           // Cache the new response for next-data.json requests and static assets
           if (shouldCache) {

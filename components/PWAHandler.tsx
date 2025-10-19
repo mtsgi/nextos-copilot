@@ -14,6 +14,8 @@ interface BeforeInstallPromptEvent extends Event {
 
 export default function PWAHandler() {
   useEffect(() => {
+    let updateInterval: NodeJS.Timeout | null = null;
+
     // Register service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -23,12 +25,9 @@ export default function PWAHandler() {
             console.log('Service Worker registered successfully:', registration.scope);
             
             // Check for updates periodically
-            const updateInterval = setInterval(() => {
+            updateInterval = setInterval(() => {
               registration.update();
             }, 60000); // Check every minute
-            
-            // Clean up interval on unmount
-            return () => clearInterval(updateInterval);
           })
           .catch((error) => {
             console.log('Service Worker registration failed:', error);
@@ -63,6 +62,9 @@ export default function PWAHandler() {
 
     // Cleanup
     return () => {
+      if (updateInterval) {
+        clearInterval(updateInterval);
+      }
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
     };
