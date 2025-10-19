@@ -64,16 +64,20 @@ self.addEventListener('fetch', (event) => {
           // Clone the response
           const responseToCache = response.clone();
           
+          // Define cacheable file extensions
+          const cacheableExtensions = new Set(['.svg', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.css', '.js']);
+          const url = new URL(event.request.url);
+          const shouldCache = url.pathname.includes('/_next/') || 
+            Array.from(cacheableExtensions).some(ext => url.pathname.endsWith(ext));
+          
           // Cache the new response for next-data.json requests and static assets
-          if (event.request.url.includes('/_next/') || 
-              event.request.url.includes('.svg') ||
-              event.request.url.includes('.png') ||
-              event.request.url.includes('.jpg') ||
-              event.request.url.includes('.css') ||
-              event.request.url.includes('.js')) {
+          if (shouldCache) {
             caches.open(CACHE_NAME)
               .then((cache) => {
-                cache.put(event.request, responseToCache);
+                return cache.put(event.request, responseToCache);
+              })
+              .catch((error) => {
+                console.log('Cache put error:', error);
               });
           }
           

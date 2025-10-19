@@ -23,9 +23,12 @@ export default function PWAHandler() {
             console.log('Service Worker registered successfully:', registration.scope);
             
             // Check for updates periodically
-            setInterval(() => {
+            const updateInterval = setInterval(() => {
               registration.update();
             }, 60000); // Check every minute
+            
+            // Clean up interval on unmount
+            return () => clearInterval(updateInterval);
           })
           .catch((error) => {
             console.log('Service Worker registration failed:', error);
