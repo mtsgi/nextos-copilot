@@ -1,0 +1,6 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" fill="#0070f3"/>
+  <path d="M48 96 L96 48 L144 96 L96 144 Z" fill="white" stroke="white" stroke-width="4"/>
+  <rect x="76" y="76" width="40" height="40" fill="#0070f3"/>
+  <text x="96" y="165" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">NextOS</text>
+</svg>

@@ -4,6 +4,7 @@ A web-based operating system built with Next.js and TypeScript, providing a comp
 
 ## Features
 
+- **Progressive Web App (PWA)**: Install and run as a standalone app with fullscreen support
 - **Window Manager**: Full-featured window management with drag, resize, minimize, maximize, and close operations
 - **Virtual Filesystem**: IndexedDB-powered filesystem for persistent storage
 - **Process Management**: Track and manage running applications
@@ -39,6 +40,16 @@ npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to use NextOS.
+
+## Progressive Web App (PWA)
+
+NextOS can be installed as a Progressive Web App on supported browsers and devices. This allows you to:
+
+- Install the app on your device's home screen
+- Run the app in fullscreen mode without browser UI
+- Access the app offline with service worker caching
+
+For detailed testing and installation instructions, see [PWA_TESTING.md](./PWA_TESTING.md).
 
 ## Technology Stack
 
