@@ -1,0 +1,96 @@
+{
+  "desktop": {
+    "title": "NextOS",
+    "mobileEdition": "モバイル版",
+    "apps": "アプリ"
+  },
+  "apps": {
+    "files": "ファイル",
+    "terminal": "ターミナル",
+    "textEditor": "テキストエディタ",
+    "settings": "設定"
+  },
+  "fileManager": {
+    "title": "ファイル",
+    "sidebar": {
+      "home": "ホーム",
+      "documents": "ドキュメント",
+      "downloads": "ダウンロード",
+      "pictures": "ピクチャー"
+    },
+    "toolbar": {
+      "goUp": "上へ"
+    },
+    "details": {
+      "title": "詳細",
+      "name": "名前",
+      "type": "種類",
+      "size": "サイズ",
+      "created": "作成日時",
+      "modified": "更新日時",
+      "preview": "プレビュー",
+      "folder": "フォルダ",
+      "file": "ファイル"
+    }
+  },
+  "terminal": {
+    "title": "ターミナル",
+    "welcome": "NextOS ターミナル v1.0.0",
+    "helpPrompt": "利用可能なコマンドを表示するには \"help\" と入力してください。",
+    "help": {
+      "title": "利用可能なコマンド:",
+      "help": "help           - このヘルプメッセージを表示",
+      "ls": "ls             - ディレクトリの内容を一覧表示",
+      "cd": "cd <path>      - ディレクトリを変更",
+      "pwd": "pwd            - 現在のディレクトリを表示",
+      "cat": "cat <file>     - ファイルの内容を表示",
+      "clear": "clear          - ターミナルをクリア",
+      "echo": "echo <text>    - テキストを表示",
+      "date": "date           - 現在の日時を表示",
+      "whoami": "whoami         - 現在のユーザーを表示"
+    },
+    "errors": {
+      "commandNotFound": "コマンドが見つかりません: {{command}}",
+      "catMissingArg": "cat: ファイル引数がありません",
+      "lsCannotAccess": "ls: '{{path}}' にアクセスできません: ディレクトリではありません",
+      "lsError": "ls: ディレクトリの読み込みエラー: {{error}}",
+      "cdNoSuchFile": "cd: {{path}}: そのようなファイルやディレクトリはありません",
+      "cdNotDirectory": "cd: {{path}}: ディレクトリではありません",
+      "cdError": "cd: エラー: {{error}}",
+      "catNoSuchFile": "cat: {{file}}: そのようなファイルやディレクトリはありません",
+      "catIsDirectory": "cat: {{file}}: ディレクトリです",
+      "catBinaryContent": "cat: {{file}}: バイナリコンテンツを表示できません",
+      "catError": "cat: エラー: {{error}}",
+      "executionError": "コマンド実行エラー: {{error}}"
+    }
+  },
+  "textEditor": {
+    "title": "テキストエディタ",
+    "toolbar": {
+      "new": "新規",
+      "save": "保存"
+    },
+    "statusBar": {
+      "lines": "行数: {{count}}",
+      "characters": "文字数: {{count}}"
+    },
+    "placeholder": "入力を開始...",
+    "untitled": "無題.txt",
+    "modified": "*",
+    "unsavedChanges": "保存されていない変更があります。続行しますか？"
+  },
+  "settings": {
+    "title": "設定",
+    "language": {
+      "title": "言語",
+      "description": "使用する言語を選択してください",
+      "english": "English (英語)",
+      "japanese": "日本語"
+    },
+    "about": {
+      "title": "NextOSについて",
+      "version": "バージョン",
+      "description": "Next.jsとTypeScriptで構築されたWebベースのオペレーティングシステム"
+    }
+  }
+}

@@ -1,13 +1,15 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AppProps } from '@/types';
 import { vfs } from '@/lib/filesystem';
 
 export default function Terminal({ windowId: _windowId }: AppProps) {
+  const { t } = useTranslation();
   const [history, setHistory] = useState<{ type: 'command' | 'output' | 'error'; text: string }[]>([
-    { type: 'output', text: 'NextOS Terminal v1.0.0' },
-    { type: 'output', text: 'Type "help" for available commands.' },
+    { type: 'output', text: t('terminal.welcome') },
+    { type: 'output', text: t('terminal.helpPrompt') },
     { type: 'output', text: '' },
   ]);
   const [input, setInput] = useState('');
@@ -36,16 +38,16 @@ export default function Terminal({ windowId: _windowId }: AppProps) {
       switch (cmd) {
         case 'help':
           addOutput([
-            'Available commands:',
-            '  help           - Show this help message',
-            '  ls             - List directory contents',
-            '  cd <path>      - Change directory',
-            '  pwd            - Print working directory',
-            '  cat <file>     - Display file contents',
-            '  clear          - Clear terminal',
-            '  echo <text>    - Print text',
-            '  date           - Show current date and time',
-            '  whoami         - Show current user',
+            t('terminal.help.title'),
+            '  ' + t('terminal.help.help'),
+            '  ' + t('terminal.help.ls'),
+            '  ' + t('terminal.help.cd'),
+            '  ' + t('terminal.help.pwd'),
+            '  ' + t('terminal.help.cat'),
+            '  ' + t('terminal.help.clear'),
+            '  ' + t('terminal.help.echo'),
+            '  ' + t('terminal.help.date'),
+            '  ' + t('terminal.help.whoami'),
           ]);
           break;
 
@@ -63,7 +65,7 @@ export default function Terminal({ windowId: _windowId }: AppProps) {
 
         case 'cat':
           if (!args[0]) {
-            addError('cat: missing file argument');
+            addError(t('terminal.errors.catMissingArg'));
           } else {
             await catFile(args[0]);
           }
@@ -86,10 +88,10 @@ export default function Terminal({ windowId: _windowId }: AppProps) {
           break;
 
         default:
-          addError(`Command not found: ${cmd}`);
+          addError(t('terminal.errors.commandNotFound', { command: cmd }));
       }
     } catch (error) {
-      addError(`Error executing command: ${error instanceof Error ? error.message : String(error)}`);
+      addError(t('terminal.errors.executionError', { error: error instanceof Error ? error.message : String(error) }));
     }
   };
 
@@ -97,7 +99,7 @@ export default function Terminal({ windowId: _windowId }: AppProps) {
     try {
       const node = await vfs.readNodeByPath(currentPath);
       if (!node || node.type !== 'directory') {
-        addError(`ls: cannot access '${currentPath}': Not a directory`);
+        addError(t('terminal.errors.lsCannotAccess', { path: currentPath }));
         return;
       }
 
@@ -117,7 +119,7 @@ export default function Terminal({ windowId: _windowId }: AppProps) {
 
       addOutput([output]);
     } catch (error) {
-      addError(`ls: error reading directory: ${error instanceof Error ? error.message : String(error)}`);
+      addError(t('terminal.errors.lsError', { error: error instanceof Error ? error.message : String(error) }));
     }
   };
 
@@ -136,18 +138,18 @@ export default function Terminal({ windowId: _windowId }: AppProps) {
 
       const node = await vfs.readNodeByPath(newPath);
       if (!node) {
-        addError(`cd: ${path}: No such file or directory`);
+        addError(t('terminal.errors.cdNoSuchFile', { path }));
         return;
       }
 
       if (node.type !== 'directory') {
-        addError(`cd: ${path}: Not a directory`);
+        addError(t('terminal.errors.cdNotDirectory', { path }));
         return;
       }
 
       setCurrentPath(newPath);
     } catch (error) {
-      addError(`cd: error: ${error instanceof Error ? error.message : String(error)}`);
+      addError(t('terminal.errors.cdError', { error: error instanceof Error ? error.message : String(error) }));
     }
   };
 
@@ -157,22 +159,22 @@ export default function Terminal({ windowId: _windowId }: AppProps) {
       const node = await vfs.readNodeByPath(filePath);
 
       if (!node) {
-        addError(`cat: ${fileName}: No such file or directory`);
+        addError(t('terminal.errors.catNoSuchFile', { file: fileName }));
         return;
       }
 
       if (node.type !== 'file') {
-        addError(`cat: ${fileName}: Is a directory`);
+        addError(t('terminal.errors.catIsDirectory', { file: fileName }));
         return;
       }
 
       if (typeof node.content === 'string') {
         addOutput([node.content]);
       } else {
-        addError(`cat: ${fileName}: Cannot display binary content`);
+        addError(t('terminal.errors.catBinaryContent', { file: fileName }));
       }
     } catch (error) {
-      addError(`cat: error: ${error instanceof Error ? error.message : String(error)}`);
+      addError(t('terminal.errors.catError', { error: error instanceof Error ? error.message : String(error) }));
     }
   };
 

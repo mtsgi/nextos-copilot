@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { windowManager } from '@/lib/window-manager';
 import { processManager } from '@/lib/process';
 import { vfs } from '@/lib/filesystem';
@@ -8,33 +9,42 @@ import Window from '@/components/window/Window';
 import FileManager from '@/components/apps/FileManager';
 import Terminal from '@/components/apps/Terminal';
 import TextEditor from '@/components/apps/TextEditor';
+import Settings from '@/components/apps/Settings';
 import type { WindowState, Application } from '@/types';
 
 const applications: Application[] = [
   {
     id: 'file-manager',
-    name: 'Files',
+    name: 'apps.files',
     icon: '📁',
     component: FileManager,
     category: 'system',
   },
   {
     id: 'terminal',
-    name: 'Terminal',
+    name: 'apps.terminal',
     icon: '⌘',
     component: Terminal,
     category: 'system',
   },
   {
     id: 'text-editor',
-    name: 'Text Editor',
+    name: 'apps.textEditor',
     icon: '📝',
     component: TextEditor,
     category: 'productivity',
   },
+  {
+    id: 'settings',
+    name: 'apps.settings',
+    icon: '⚙️',
+    component: Settings,
+    category: 'system',
+  },
 ];
 
 export default function Desktop() {
+  const { t } = useTranslation();
   const [windows, setWindows] = useState<WindowState[]>([]);
   const [initialized, setInitialized] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -87,8 +97,8 @@ export default function Desktop() {
   }, []);
 
   const launchApp = (app: Application) => {
-    const windowId = windowManager.createWindow(app.id, app.name);
-    processManager.createProcess(app.name, app.id, windowId);
+    const windowId = windowManager.createWindow(app.id, t(app.name));
+    processManager.createProcess(t(app.name), app.id, windowId);
     
     // On mobile, close the app drawer and maximize the window
     if (isMobile) {
@@ -117,7 +127,7 @@ export default function Desktop() {
               onDoubleClick={() => launchApp(app)}
             >
               <div className="text-6xl">{app.icon}</div>
-              <span className="text-white text-sm font-medium drop-shadow-lg">{app.name}</span>
+              <span className="text-white text-sm font-medium drop-shadow-lg">{t(app.name)}</span>
             </button>
           ))}
         </div>
@@ -127,8 +137,8 @@ export default function Desktop() {
       {isMobile && windows.length === 0 && (
         <div className="flex-1 flex flex-col items-center justify-center p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-white mb-2">NextOS</h1>
-            <p className="text-white/70 text-sm">Mobile Edition</p>
+            <h1 className="text-4xl font-bold text-white mb-2">{t('desktop.title')}</h1>
+            <p className="text-white/70 text-sm">{t('desktop.mobileEdition')}</p>
           </div>
           <div className="grid grid-cols-3 gap-6 w-full max-w-md">
             {applications.map((app) => (
@@ -138,7 +148,7 @@ export default function Desktop() {
                 onClick={() => launchApp(app)}
               >
                 <div className="text-5xl">{app.icon}</div>
-                <span className="text-white text-xs font-medium text-center">{app.name}</span>
+                <span className="text-white text-xs font-medium text-center">{t(app.name)}</span>
               </button>
             ))}
           </div>
@@ -180,7 +190,7 @@ export default function Desktop() {
                   key={app.id}
                   className="w-10 h-10 flex items-center justify-center rounded hover:bg-white/10 transition-colors text-2xl"
                   onClick={() => launchApp(app)}
-                  title={app.name}
+                  title={t(app.name)}
                 >
                   {app.icon}
                 </button>
@@ -241,7 +251,7 @@ export default function Desktop() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-6" />
-            <h2 className="text-white text-xl font-semibold mb-4">Apps</h2>
+            <h2 className="text-white text-xl font-semibold mb-4">{t('desktop.apps')}</h2>
             <div className="grid grid-cols-4 gap-4">
               {applications.map((app) => (
                 <button
@@ -250,7 +260,7 @@ export default function Desktop() {
                   onClick={() => launchApp(app)}
                 >
                   <div className="text-4xl">{app.icon}</div>
-                  <span className="text-white text-xs text-center">{app.name}</span>
+                  <span className="text-white text-xs text-center">{t(app.name)}</span>
                 </button>
               ))}
             </div>
