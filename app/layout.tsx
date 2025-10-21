@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import PWAHandler from "@/components/PWAHandler";
+import I18nProvider from "@/components/I18nProvider";
 
 export const metadata: Metadata = {
   title: "NextOS - Web-Based Operating System",
@@ -38,8 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        <PWAHandler />
-        {children}
+        <I18nProvider>
+          <PWAHandler />
+          {children}
+        </I18nProvider>
       </body>
     </html>
   );

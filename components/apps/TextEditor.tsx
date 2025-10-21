@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AppProps } from '@/types';
 
 export default function TextEditor({ windowId: _windowId }: AppProps) {
+  const { t } = useTranslation();
   const [content, setContent] = useState('');
-  const [fileName, setFileName] = useState('untitled.txt');
+  const [fileName, setFileName] = useState(t('textEditor.untitled'));
   const [isSaved, setIsSaved] = useState(true);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -20,11 +22,11 @@ export default function TextEditor({ windowId: _windowId }: AppProps) {
   };
 
   const handleNew = () => {
-    if (!isSaved && !confirm('You have unsaved changes. Continue?')) {
+    if (!isSaved && !confirm(t('textEditor.unsavedChanges'))) {
       return;
     }
     setContent('');
-    setFileName('untitled.txt');
+    setFileName(t('textEditor.untitled'));
     setIsSaved(true);
   };
 
@@ -36,18 +38,18 @@ export default function TextEditor({ windowId: _windowId }: AppProps) {
           className="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors text-sm"
           onClick={handleNew}
         >
-          New
+          {t('textEditor.toolbar.new')}
         </button>
         <button
           className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm"
           onClick={handleSave}
         >
-          Save
+          {t('textEditor.toolbar.save')}
         </button>
         <div className="flex-1" />
         <div className="text-sm text-gray-600">
           {fileName}
-          {!isSaved && ' *'}
+          {!isSaved && ' ' + t('textEditor.modified')}
         </div>
       </div>
 
@@ -57,14 +59,14 @@ export default function TextEditor({ windowId: _windowId }: AppProps) {
           value={content}
           onChange={handleContentChange}
           className="absolute inset-0 w-full h-full p-4 font-mono text-sm resize-none outline-none"
-          placeholder="Start typing..."
+          placeholder={t('textEditor.placeholder')}
         />
       </div>
 
       {/* Status Bar */}
       <div className="bg-gray-100 border-t border-gray-300 px-4 py-1 flex items-center justify-between text-xs text-gray-600">
-        <div>Lines: {content.split('\n').length}</div>
-        <div>Characters: {content.length}</div>
+        <div>{t('textEditor.statusBar.lines', { count: content.split('\n').length })}</div>
+        <div>{t('textEditor.statusBar.characters', { count: content.length })}</div>
       </div>
     </div>
   );

@@ -1,0 +1,96 @@
+{
+  "desktop": {
+    "title": "NextOS",
+    "mobileEdition": "Mobile Edition",
+    "apps": "Apps"
+  },
+  "apps": {
+    "files": "Files",
+    "terminal": "Terminal",
+    "textEditor": "Text Editor",
+    "settings": "Settings"
+  },
+  "fileManager": {
+    "title": "Files",
+    "sidebar": {
+      "home": "Home",
+      "documents": "Documents",
+      "downloads": "Downloads",
+      "pictures": "Pictures"
+    },
+    "toolbar": {
+      "goUp": "Go up"
+    },
+    "details": {
+      "title": "Details",
+      "name": "Name",
+      "type": "Type",
+      "size": "Size",
+      "created": "Created",
+      "modified": "Modified",
+      "preview": "Preview",
+      "folder": "Folder",
+      "file": "File"
+    }
+  },
+  "terminal": {
+    "title": "Terminal",
+    "welcome": "NextOS Terminal v1.0.0",
+    "helpPrompt": "Type \"help\" for available commands.",
+    "help": {
+      "title": "Available commands:",
+      "help": "help           - Show this help message",
+      "ls": "ls             - List directory contents",
+      "cd": "cd <path>      - Change directory",
+      "pwd": "pwd            - Print working directory",
+      "cat": "cat <file>     - Display file contents",
+      "clear": "clear          - Clear terminal",
+      "echo": "echo <text>    - Print text",
+      "date": "date           - Show current date and time",
+      "whoami": "whoami         - Show current user"
+    },
+    "errors": {
+      "commandNotFound": "Command not found: {{command}}",
+      "catMissingArg": "cat: missing file argument",
+      "lsCannotAccess": "ls: cannot access '{{path}}': Not a directory",
+      "lsError": "ls: error reading directory: {{error}}",
+      "cdNoSuchFile": "cd: {{path}}: No such file or directory",
+      "cdNotDirectory": "cd: {{path}}: Not a directory",
+      "cdError": "cd: error: {{error}}",
+      "catNoSuchFile": "cat: {{file}}: No such file or directory",
+      "catIsDirectory": "cat: {{file}}: Is a directory",
+      "catBinaryContent": "cat: {{file}}: Cannot display binary content",
+      "catError": "cat: error: {{error}}",
+      "executionError": "Error executing command: {{error}}"
+    }
+  },
+  "textEditor": {
+    "title": "Text Editor",
+    "toolbar": {
+      "new": "New",
+      "save": "Save"
+    },
+    "statusBar": {
+      "lines": "Lines: {{count}}",
+      "characters": "Characters: {{count}}"
+    },
+    "placeholder": "Start typing...",
+    "untitled": "untitled.txt",
+    "modified": "*",
+    "unsavedChanges": "You have unsaved changes. Continue?"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": {
+      "title": "Language",
+      "description": "Select your preferred language",
+      "english": "English",
+      "japanese": "日本語 (Japanese)"
+    },
+    "about": {
+      "title": "About NextOS",
+      "version": "Version",
+      "description": "A web-based operating system built with Next.js and TypeScript"
+    }
+  }
+}
