@@ -19,7 +19,20 @@
       "pictures": "ピクチャー"
     },
     "toolbar": {
-      "goUp": "上へ"
+      "goUp": "上へ",
+      "menu": "メニュー",
+      "search": "ファイルを検索...",
+      "sortBy": "並び替え",
+      "sortName": "名前",
+      "sortDate": "更新日時",
+      "sortSize": "サイズ",
+      "sortType": "種類",
+      "filterBy": "フィルター",
+      "filterAll": "すべて",
+      "filterFiles": "ファイルのみ",
+      "filterFolders": "フォルダのみ",
+      "gridView": "グリッド表示",
+      "listView": "リスト表示"
     },
     "details": {
       "title": "詳細",
@@ -30,8 +43,10 @@
       "modified": "更新日時",
       "preview": "プレビュー",
       "folder": "フォルダ",
-      "file": "ファイル"
-    }
+      "file": "ファイル",
+      "close": "閉じる"
+    },
+    "emptyFolder": "このフォルダは空です"
   },
   "terminal": {
     "title": "ターミナル",
