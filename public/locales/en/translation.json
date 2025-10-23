@@ -19,7 +19,20 @@
       "pictures": "Pictures"
     },
     "toolbar": {
-      "goUp": "Go up"
+      "goUp": "Go up",
+      "menu": "Menu",
+      "search": "Search files...",
+      "sortBy": "Sort by",
+      "sortName": "Name",
+      "sortDate": "Date modified",
+      "sortSize": "Size",
+      "sortType": "Type",
+      "filterBy": "Filter",
+      "filterAll": "All items",
+      "filterFiles": "Files only",
+      "filterFolders": "Folders only",
+      "gridView": "Grid view",
+      "listView": "List view"
     },
     "details": {
       "title": "Details",
@@ -30,8 +43,10 @@
       "modified": "Modified",
       "preview": "Preview",
       "folder": "Folder",
-      "file": "File"
-    }
+      "file": "File",
+      "close": "Close"
+    },
+    "emptyFolder": "This folder is empty"
   },
   "terminal": {
     "title": "Terminal",
