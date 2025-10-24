@@ -99,8 +99,14 @@
     "language": {
       "title": "言語",
       "description": "使用する言語を選択してください",
-      "english": "English (英語)",
-      "japanese": "日本語"
+      "english": "English",
+      "japanese": "日本語",
+      "simplifiedChinese": "简体中文",
+      "traditionalChinese": "繁體中文",
+      "spanish": "Español",
+      "french": "Français",
+      "german": "Deutsch",
+      "arabic": "العربية"
     },
     "about": {
       "title": "NextOSについて",

@@ -1,0 +1,117 @@
+{
+  "desktop": {
+    "title": "NextOS",
+    "mobileEdition": "Édition Mobile",
+    "apps": "Applications"
+  },
+  "apps": {
+    "files": "Fichiers",
+    "terminal": "Terminal",
+    "textEditor": "Éditeur de Texte",
+    "settings": "Paramètres"
+  },
+  "fileManager": {
+    "title": "Fichiers",
+    "sidebar": {
+      "home": "Accueil",
+      "documents": "Documents",
+      "downloads": "Téléchargements",
+      "pictures": "Images"
+    },
+    "toolbar": {
+      "goUp": "Remonter",
+      "menu": "Menu",
+      "search": "Rechercher des fichiers...",
+      "sortBy": "Trier par",
+      "sortName": "Nom",
+      "sortDate": "Date de modification",
+      "sortSize": "Taille",
+      "sortType": "Type",
+      "filterBy": "Filtrer",
+      "filterAll": "Tous les éléments",
+      "filterFiles": "Fichiers uniquement",
+      "filterFolders": "Dossiers uniquement",
+      "gridView": "Vue en grille",
+      "listView": "Vue en liste"
+    },
+    "details": {
+      "title": "Détails",
+      "name": "Nom",
+      "type": "Type",
+      "size": "Taille",
+      "created": "Créé",
+      "modified": "Modifié",
+      "preview": "Aperçu",
+      "folder": "Dossier",
+      "file": "Fichier",
+      "close": "Fermer"
+    },
+    "emptyFolder": "Ce dossier est vide"
+  },
+  "terminal": {
+    "title": "Terminal",
+    "welcome": "Terminal NextOS v1.0.0",
+    "helpPrompt": "Tapez \"help\" pour voir les commandes disponibles.",
+    "help": {
+      "title": "Commandes disponibles :",
+      "help": "help           - Affiche ce message d'aide",
+      "ls": "ls             - Liste le contenu du répertoire",
+      "cd": "cd <chemin>    - Change de répertoire",
+      "pwd": "pwd            - Affiche le répertoire actuel",
+      "cat": "cat <fichier>  - Affiche le contenu du fichier",
+      "clear": "clear          - Efface le terminal",
+      "echo": "echo <texte>   - Affiche du texte",
+      "date": "date           - Affiche la date et l'heure actuelles",
+      "whoami": "whoami         - Affiche l'utilisateur actuel"
+    },
+    "errors": {
+      "commandNotFound": "Commande introuvable : {{command}}",
+      "catMissingArg": "cat : argument de fichier manquant",
+      "lsCannotAccess": "ls : impossible d'accéder à '{{path}}' : Ce n'est pas un répertoire",
+      "lsError": "ls : erreur de lecture du répertoire : {{error}}",
+      "cdNoSuchFile": "cd : {{path}} : Aucun fichier ou répertoire de ce type",
+      "cdNotDirectory": "cd : {{path}} : Ce n'est pas un répertoire",
+      "cdError": "cd : erreur : {{error}}",
+      "catNoSuchFile": "cat : {{file}} : Aucun fichier ou répertoire de ce type",
+      "catIsDirectory": "cat : {{file}} : C'est un répertoire",
+      "catBinaryContent": "cat : {{file}} : Impossible d'afficher le contenu binaire",
+      "catError": "cat : erreur : {{error}}",
+      "executionError": "Erreur lors de l'exécution de la commande : {{error}}"
+    }
+  },
+  "textEditor": {
+    "title": "Éditeur de Texte",
+    "toolbar": {
+      "new": "Nouveau",
+      "save": "Enregistrer"
+    },
+    "statusBar": {
+      "lines": "Lignes : {{count}}",
+      "characters": "Caractères : {{count}}"
+    },
+    "placeholder": "Commencez à taper...",
+    "untitled": "sans_titre.txt",
+    "modified": "*",
+    "unsavedChanges": "Vous avez des modifications non enregistrées. Continuer ?"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": {
+      "title": "Langue",
+      "description": "Sélectionnez votre langue préférée",
+      "english": "English",
+      "japanese": "日本語",
+      "simplifiedChinese": "简体中文",
+      "traditionalChinese": "繁體中文",
+      "spanish": "Español",
+      "french": "Français",
+      "german": "Deutsch",
+      "arabic": "العربية"
+    },
+    "about": {
+      "title": "À propos de NextOS",
+      "version": "Version",
+      "description": "Un système d'exploitation basé sur le web construit avec Next.js et TypeScript"
+    }
+  }
+}
