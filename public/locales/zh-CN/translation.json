@@ -1,0 +1,117 @@
+{
+  "desktop": {
+    "title": "NextOS",
+    "mobileEdition": "移动版",
+    "apps": "应用"
+  },
+  "apps": {
+    "files": "文件",
+    "terminal": "终端",
+    "textEditor": "文本编辑器",
+    "settings": "设置"
+  },
+  "fileManager": {
+    "title": "文件",
+    "sidebar": {
+      "home": "主页",
+      "documents": "文档",
+      "downloads": "下载",
+      "pictures": "图片"
+    },
+    "toolbar": {
+      "goUp": "向上",
+      "menu": "菜单",
+      "search": "搜索文件...",
+      "sortBy": "排序方式",
+      "sortName": "名称",
+      "sortDate": "修改日期",
+      "sortSize": "大小",
+      "sortType": "类型",
+      "filterBy": "筛选",
+      "filterAll": "所有项目",
+      "filterFiles": "仅文件",
+      "filterFolders": "仅文件夹",
+      "gridView": "网格视图",
+      "listView": "列表视图"
+    },
+    "details": {
+      "title": "详细信息",
+      "name": "名称",
+      "type": "类型",
+      "size": "大小",
+      "created": "创建时间",
+      "modified": "修改时间",
+      "preview": "预览",
+      "folder": "文件夹",
+      "file": "文件",
+      "close": "关闭"
+    },
+    "emptyFolder": "此文件夹为空"
+  },
+  "terminal": {
+    "title": "终端",
+    "welcome": "NextOS 终端 v1.0.0",
+    "helpPrompt": "输入 \"help\" 查看可用命令。",
+    "help": {
+      "title": "可用命令：",
+      "help": "help           - 显示此帮助信息",
+      "ls": "ls             - 列出目录内容",
+      "cd": "cd <path>      - 更改目录",
+      "pwd": "pwd            - 显示当前目录",
+      "cat": "cat <file>     - 显示文件内容",
+      "clear": "clear          - 清除终端",
+      "echo": "echo <text>    - 打印文本",
+      "date": "date           - 显示当前日期和时间",
+      "whoami": "whoami         - 显示当前用户"
+    },
+    "errors": {
+      "commandNotFound": "找不到命令：{{command}}",
+      "catMissingArg": "cat：缺少文件参数",
+      "lsCannotAccess": "ls：无法访问 '{{path}}'：不是目录",
+      "lsError": "ls：读取目录错误：{{error}}",
+      "cdNoSuchFile": "cd：{{path}}：没有该文件或目录",
+      "cdNotDirectory": "cd：{{path}}：不是目录",
+      "cdError": "cd：错误：{{error}}",
+      "catNoSuchFile": "cat：{{file}}：没有该文件或目录",
+      "catIsDirectory": "cat：{{file}}：是一个目录",
+      "catBinaryContent": "cat：{{file}}：无法显示二进制内容",
+      "catError": "cat：错误：{{error}}",
+      "executionError": "执行命令时出错：{{error}}"
+    }
+  },
+  "textEditor": {
+    "title": "文本编辑器",
+    "toolbar": {
+      "new": "新建",
+      "save": "保存"
+    },
+    "statusBar": {
+      "lines": "行数：{{count}}",
+      "characters": "字符数：{{count}}"
+    },
+    "placeholder": "开始输入...",
+    "untitled": "无标题.txt",
+    "modified": "*",
+    "unsavedChanges": "您有未保存的更改。是否继续？"
+  },
+  "settings": {
+    "title": "设置",
+    "language": {
+      "title": "语言",
+      "description": "选择您的首选语言",
+      "english": "English",
+      "japanese": "日本語",
+      "simplifiedChinese": "简体中文",
+      "traditionalChinese": "繁體中文",
+      "spanish": "Español",
+      "french": "Français",
+      "german": "Deutsch",
+      "arabic": "العربية"
+    },
+    "about": {
+      "title": "关于 NextOS",
+      "version": "版本",
+      "description": "使用 Next.js 和 TypeScript 构建的基于 Web 的操作系统"
+    }
+  }
+}

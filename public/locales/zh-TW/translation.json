@@ -1,0 +1,117 @@
+{
+  "desktop": {
+    "title": "NextOS",
+    "mobileEdition": "行動版",
+    "apps": "應用程式"
+  },
+  "apps": {
+    "files": "檔案",
+    "terminal": "終端機",
+    "textEditor": "文字編輯器",
+    "settings": "設定"
+  },
+  "fileManager": {
+    "title": "檔案",
+    "sidebar": {
+      "home": "首頁",
+      "documents": "文件",
+      "downloads": "下載",
+      "pictures": "圖片"
+    },
+    "toolbar": {
+      "goUp": "向上",
+      "menu": "選單",
+      "search": "搜尋檔案...",
+      "sortBy": "排序方式",
+      "sortName": "名稱",
+      "sortDate": "修改日期",
+      "sortSize": "大小",
+      "sortType": "類型",
+      "filterBy": "篩選",
+      "filterAll": "所有項目",
+      "filterFiles": "僅檔案",
+      "filterFolders": "僅資料夾",
+      "gridView": "網格檢視",
+      "listView": "清單檢視"
+    },
+    "details": {
+      "title": "詳細資料",
+      "name": "名稱",
+      "type": "類型",
+      "size": "大小",
+      "created": "建立時間",
+      "modified": "修改時間",
+      "preview": "預覽",
+      "folder": "資料夾",
+      "file": "檔案",
+      "close": "關閉"
+    },
+    "emptyFolder": "此資料夾為空"
+  },
+  "terminal": {
+    "title": "終端機",
+    "welcome": "NextOS 終端機 v1.0.0",
+    "helpPrompt": "輸入 \"help\" 檢視可用指令。",
+    "help": {
+      "title": "可用指令：",
+      "help": "help           - 顯示此說明訊息",
+      "ls": "ls             - 列出目錄內容",
+      "cd": "cd <path>      - 變更目錄",
+      "pwd": "pwd            - 顯示目前目錄",
+      "cat": "cat <file>     - 顯示檔案內容",
+      "clear": "clear          - 清除終端機",
+      "echo": "echo <text>    - 列印文字",
+      "date": "date           - 顯示目前日期和時間",
+      "whoami": "whoami         - 顯示目前使用者"
+    },
+    "errors": {
+      "commandNotFound": "找不到指令：{{command}}",
+      "catMissingArg": "cat：缺少檔案參數",
+      "lsCannotAccess": "ls：無法存取 '{{path}}'：不是目錄",
+      "lsError": "ls：讀取目錄錯誤：{{error}}",
+      "cdNoSuchFile": "cd：{{path}}：沒有該檔案或目錄",
+      "cdNotDirectory": "cd：{{path}}：不是目錄",
+      "cdError": "cd：錯誤：{{error}}",
+      "catNoSuchFile": "cat：{{file}}：沒有該檔案或目錄",
+      "catIsDirectory": "cat：{{file}}：是一個目錄",
+      "catBinaryContent": "cat：{{file}}：無法顯示二進位內容",
+      "catError": "cat：錯誤：{{error}}",
+      "executionError": "執行指令時發生錯誤：{{error}}"
+    }
+  },
+  "textEditor": {
+    "title": "文字編輯器",
+    "toolbar": {
+      "new": "新增",
+      "save": "儲存"
+    },
+    "statusBar": {
+      "lines": "行數：{{count}}",
+      "characters": "字元數：{{count}}"
+    },
+    "placeholder": "開始輸入...",
+    "untitled": "未命名.txt",
+    "modified": "*",
+    "unsavedChanges": "您有未儲存的變更。是否繼續？"
+  },
+  "settings": {
+    "title": "設定",
+    "language": {
+      "title": "語言",
+      "description": "選擇您偏好的語言",
+      "english": "English",
+      "japanese": "日本語",
+      "simplifiedChinese": "简体中文",
+      "traditionalChinese": "繁體中文",
+      "spanish": "Español",
+      "french": "Français",
+      "german": "Deutsch",
+      "arabic": "العربية"
+    },
+    "about": {
+      "title": "關於 NextOS",
+      "version": "版本",
+      "description": "使用 Next.js 和 TypeScript 建構的網頁式作業系統"
+    }
+  }
+}
