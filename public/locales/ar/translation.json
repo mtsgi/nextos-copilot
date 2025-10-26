@@ -1,0 +1,117 @@
+{
+  "desktop": {
+    "title": "NextOS",
+    "mobileEdition": "النسخة المحمولة",
+    "apps": "التطبيقات"
+  },
+  "apps": {
+    "files": "الملفات",
+    "terminal": "الطرفية",
+    "textEditor": "محرر النصوص",
+    "settings": "الإعدادات"
+  },
+  "fileManager": {
+    "title": "الملفات",
+    "sidebar": {
+      "home": "الرئيسية",
+      "documents": "المستندات",
+      "downloads": "التنزيلات",
+      "pictures": "الصور"
+    },
+    "toolbar": {
+      "goUp": "للأعلى",
+      "menu": "القائمة",
+      "search": "البحث عن ملفات...",
+      "sortBy": "ترتيب حسب",
+      "sortName": "الاسم",
+      "sortDate": "تاريخ التعديل",
+      "sortSize": "الحجم",
+      "sortType": "النوع",
+      "filterBy": "تصفية",
+      "filterAll": "كل العناصر",
+      "filterFiles": "الملفات فقط",
+      "filterFolders": "المجلدات فقط",
+      "gridView": "عرض الشبكة",
+      "listView": "عرض القائمة"
+    },
+    "details": {
+      "title": "التفاصيل",
+      "name": "الاسم",
+      "type": "النوع",
+      "size": "الحجم",
+      "created": "تاريخ الإنشاء",
+      "modified": "تاريخ التعديل",
+      "preview": "معاينة",
+      "folder": "مجلد",
+      "file": "ملف",
+      "close": "إغلاق"
+    },
+    "emptyFolder": "هذا المجلد فارغ"
+  },
+  "terminal": {
+    "title": "الطرفية",
+    "welcome": "طرفية NextOS الإصدار 1.0.0",
+    "helpPrompt": "اكتب \"help\" لعرض الأوامر المتاحة.",
+    "help": {
+      "title": "الأوامر المتاحة:",
+      "help": "help           - عرض رسالة المساعدة هذه",
+      "ls": "ls             - سرد محتويات الدليل",
+      "cd": "cd <مسار>      - تغيير الدليل",
+      "pwd": "pwd            - طباعة دليل العمل",
+      "cat": "cat <ملف>      - عرض محتويات الملف",
+      "clear": "clear          - مسح الطرفية",
+      "echo": "echo <نص>      - طباعة النص",
+      "date": "date           - عرض التاريخ والوقت الحالي",
+      "whoami": "whoami         - عرض المستخدم الحالي"
+    },
+    "errors": {
+      "commandNotFound": "الأمر غير موجود: {{command}}",
+      "catMissingArg": "cat: وسيطة الملف مفقودة",
+      "lsCannotAccess": "ls: لا يمكن الوصول إلى '{{path}}': ليس دليلاً",
+      "lsError": "ls: خطأ في قراءة الدليل: {{error}}",
+      "cdNoSuchFile": "cd: {{path}}: لا يوجد ملف أو دليل بهذا الاسم",
+      "cdNotDirectory": "cd: {{path}}: ليس دليلاً",
+      "cdError": "cd: خطأ: {{error}}",
+      "catNoSuchFile": "cat: {{file}}: لا يوجد ملف أو دليل بهذا الاسم",
+      "catIsDirectory": "cat: {{file}}: هو دليل",
+      "catBinaryContent": "cat: {{file}}: لا يمكن عرض المحتوى الثنائي",
+      "catError": "cat: خطأ: {{error}}",
+      "executionError": "خطأ في تنفيذ الأمر: {{error}}"
+    }
+  },
+  "textEditor": {
+    "title": "محرر النصوص",
+    "toolbar": {
+      "new": "جديد",
+      "save": "حفظ"
+    },
+    "statusBar": {
+      "lines": "الأسطر: {{count}}",
+      "characters": "الأحرف: {{count}}"
+    },
+    "placeholder": "ابدأ الكتابة...",
+    "untitled": "بدون_عنوان.txt",
+    "modified": "*",
+    "unsavedChanges": "لديك تغييرات غير محفوظة. هل تريد المتابعة؟"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "language": {
+      "title": "اللغة",
+      "description": "اختر لغتك المفضلة",
+      "english": "English",
+      "japanese": "日本語",
+      "simplifiedChinese": "简体中文",
+      "traditionalChinese": "繁體中文",
+      "spanish": "Español",
+      "french": "Français",
+      "german": "Deutsch",
+      "arabic": "العربية"
+    },
+    "about": {
+      "title": "حول NextOS",
+      "version": "الإصدار",
+      "description": "نظام تشغيل قائم على الويب مبني باستخدام Next.js و TypeScript"
+    }
+  }
+}

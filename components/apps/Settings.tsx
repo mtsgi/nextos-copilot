@@ -11,6 +11,17 @@ export default function Settings({ windowId: _windowId }: AppProps) {
     i18n.changeLanguage(lng);
   };
 
+  const languages = [
+    { code: 'en', label: 'settings.language.english' },
+    { code: 'ja', label: 'settings.language.japanese' },
+    { code: 'zh-CN', label: 'settings.language.simplifiedChinese' },
+    { code: 'zh-TW', label: 'settings.language.traditionalChinese' },
+    { code: 'es', label: 'settings.language.spanish' },
+    { code: 'fr', label: 'settings.language.french' },
+    { code: 'de', label: 'settings.language.german' },
+    { code: 'ar', label: 'settings.language.arabic' },
+  ];
+
   return (
     <div className="h-full bg-white overflow-auto">
       <div className="max-w-2xl mx-auto p-6 space-y-8">
@@ -21,40 +32,33 @@ export default function Settings({ windowId: _windowId }: AppProps) {
             <p className="text-sm text-gray-600 mt-1">{t('settings.language.description')}</p>
           </div>
           <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-            <button
-              className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                i18n.language === 'en' || i18n.language.startsWith('en-')
-                  ? 'bg-blue-500 text-white shadow-md'
-                  : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200'
-              }`}
-              onClick={() => changeLanguage('en')}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-medium">{t('settings.language.english')}</span>
-                {(i18n.language === 'en' || i18n.language.startsWith('en-')) && (
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-              </div>
-            </button>
-            <button
-              className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
-                i18n.language === 'ja' || i18n.language.startsWith('ja-')
-                  ? 'bg-blue-500 text-white shadow-md'
-                  : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200'
-              }`}
-              onClick={() => changeLanguage('ja')}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-medium">{t('settings.language.japanese')}</span>
-                {(i18n.language === 'ja' || i18n.language.startsWith('ja-')) && (
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-              </div>
-            </button>
+            {languages.map((language) => {
+              const isSelected = 
+                i18n.language === language.code || 
+                i18n.language.startsWith(`${language.code}-`);
+              
+              return (
+                <button
+                  key={language.code}
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                    isSelected
+                      ? 'bg-blue-500 text-white shadow-md'
+                      : 'bg-white hover:bg-gray-100 text-gray-700 border border-gray-200'
+                  }`}
+                  onClick={() => changeLanguage(language.code)}
+                  dir={language.code === 'ar' ? 'rtl' : 'ltr'}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">{t(language.label)}</span>
+                    {isSelected && (
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </section>
 
