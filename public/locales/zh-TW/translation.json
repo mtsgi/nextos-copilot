@@ -8,7 +8,8 @@
     "files": "檔案",
     "terminal": "終端機",
     "textEditor": "文字編輯器",
-    "settings": "設定"
+    "settings": "設定",
+    "controlCenter": "控制中心"
   },
   "fileManager": {
     "title": "檔案",
@@ -112,6 +113,35 @@
       "title": "關於 NextOS",
       "version": "版本",
       "description": "使用 Next.js 和 TypeScript 建構的網頁式作業系統"
+    }
+  },
+  "controlCenter": {
+    "title": "控制中心",
+    "systemStatus": {
+      "title": "系統狀態",
+      "battery": "電池",
+      "network": "網路",
+      "volume": "音量",
+      "charging": "充電中",
+      "notAvailable": "不可用",
+      "online": "線上",
+      "offline": "離線"
+    },
+    "quickToggles": {
+      "title": "快速切換",
+      "darkMode": "深色模式",
+      "doNotDisturb": "勿擾模式",
+      "airplaneMode": "飛航模式"
+    },
+    "sliderControls": {
+      "title": "控制",
+      "brightness": "亮度",
+      "volume": "音量"
+    },
+    "quickActions": {
+      "title": "快速操作",
+      "screenshot": "螢幕截圖",
+      "lock": "鎖定螢幕"
     }
   }
 }

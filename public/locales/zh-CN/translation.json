@@ -8,7 +8,8 @@
     "files": "文件",
     "terminal": "终端",
     "textEditor": "文本编辑器",
-    "settings": "设置"
+    "settings": "设置",
+    "controlCenter": "控制中心"
   },
   "fileManager": {
     "title": "文件",
@@ -112,6 +113,35 @@
       "title": "关于 NextOS",
       "version": "版本",
       "description": "使用 Next.js 和 TypeScript 构建的基于 Web 的操作系统"
+    }
+  },
+  "controlCenter": {
+    "title": "控制中心",
+    "systemStatus": {
+      "title": "系统状态",
+      "battery": "电池",
+      "network": "网络",
+      "volume": "音量",
+      "charging": "充电中",
+      "notAvailable": "不可用",
+      "online": "在线",
+      "offline": "离线"
+    },
+    "quickToggles": {
+      "title": "快速切换",
+      "darkMode": "深色模式",
+      "doNotDisturb": "勿扰模式",
+      "airplaneMode": "飞行模式"
+    },
+    "sliderControls": {
+      "title": "控制",
+      "brightness": "亮度",
+      "volume": "音量"
+    },
+    "quickActions": {
+      "title": "快速操作",
+      "screenshot": "截图",
+      "lock": "锁定屏幕"
     }
   }
 }
