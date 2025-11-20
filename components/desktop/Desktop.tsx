@@ -11,6 +11,9 @@ import Terminal from '@/components/apps/Terminal';
 import TextEditor from '@/components/apps/TextEditor';
 import Settings from '@/components/apps/Settings';
 import ControlCenter from '@/components/apps/ControlCenter';
+import Writer from '@/components/nextoffice/Writer';
+import Calc from '@/components/nextoffice/Calc';
+import Slides from '@/components/nextoffice/Slides';
 import type { WindowState, Application } from '@/types';
 
 const applications: Application[] = [
@@ -33,6 +36,27 @@ const applications: Application[] = [
     name: 'apps.textEditor',
     icon: '📝',
     component: TextEditor,
+    category: 'productivity',
+  },
+  {
+    id: 'writer',
+    name: 'apps.writer',
+    icon: '📄',
+    component: Writer,
+    category: 'productivity',
+  },
+  {
+    id: 'calc',
+    name: 'apps.calc',
+    icon: '📊',
+    component: Calc,
+    category: 'productivity',
+  },
+  {
+    id: 'slides',
+    name: 'apps.slides',
+    icon: '📽️',
+    component: Slides,
     category: 'productivity',
   },
   {
