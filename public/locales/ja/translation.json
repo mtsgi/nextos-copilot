@@ -9,7 +9,10 @@
     "terminal": "ターミナル",
     "textEditor": "テキストエディタ",
     "settings": "設定",
-    "controlCenter": "コントロールセンター"
+    "controlCenter": "コントロールセンター",
+    "writer": "NextOffice Writer",
+    "calc": "NextOffice Calc",
+    "slides": "NextOffice Slides"
   },
   "fileManager": {
     "title": "ファイル",
@@ -143,5 +146,147 @@
       "screenshot": "スクリーンショット",
       "lock": "画面ロック"
     }
+  },
+  "writer": {
+    "title": "NextOffice Writer",
+    "toolbar": {
+      "new": "新規",
+      "open": "開く",
+      "save": "保存",
+      "export": "エクスポート",
+      "bold": "太字",
+      "italic": "斜体",
+      "underline": "下線",
+      "strikethrough": "取り消し線",
+      "alignLeft": "左揃え",
+      "alignCenter": "中央揃え",
+      "alignRight": "右揃え",
+      "alignJustify": "両端揃え",
+      "bulletList": "箇条書き",
+      "numberedList": "番号付きリスト",
+      "undo": "元に戻す",
+      "redo": "やり直す",
+      "font": "フォント",
+      "fontSize": "フォントサイズ",
+      "textColor": "文字色",
+      "backgroundColor": "背景色",
+      "template": "テンプレート"
+    },
+    "statusBar": {
+      "words": "単語数",
+      "characters": "文字数",
+      "pages": "ページ数"
+    },
+    "templates": {
+      "blank": "白紙の文書",
+      "letter": "手紙",
+      "resume": "履歴書",
+      "report": "レポート"
+    },
+    "export": {
+      "title": "文書をエクスポート",
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "txt": "プレーンテキスト"
+    },
+    "placeholder": "文書の入力を開始...",
+    "untitled": "無題の文書",
+    "modified": "*"
+  },
+  "calc": {
+    "title": "NextOffice Calc",
+    "toolbar": {
+      "new": "新規",
+      "open": "開く",
+      "save": "保存",
+      "export": "エクスポート",
+      "bold": "太字",
+      "italic": "斜体",
+      "alignLeft": "左揃え",
+      "alignCenter": "中央揃え",
+      "alignRight": "右揃え",
+      "addChart": "グラフを挿入",
+      "function": "関数を挿入",
+      "sort": "並べ替え",
+      "filter": "フィルター",
+      "merge": "セルを結合",
+      "format": "セルの書式設定"
+    },
+    "statusBar": {
+      "cell": "セル",
+      "sum": "合計",
+      "average": "平均",
+      "count": "個数"
+    },
+    "sheets": {
+      "new": "新しいシート",
+      "rename": "名前の変更",
+      "delete": "削除",
+      "sheet": "シート"
+    },
+    "functions": {
+      "sum": "合計",
+      "average": "平均",
+      "count": "個数",
+      "max": "最大",
+      "min": "最小",
+      "if": "条件"
+    },
+    "charts": {
+      "bar": "棒グラフ",
+      "line": "折れ線グラフ",
+      "pie": "円グラフ",
+      "scatter": "散布図"
+    },
+    "export": {
+      "title": "スプレッドシートをエクスポート",
+      "xlsx": "XLSX",
+      "csv": "CSV"
+    },
+    "untitled": "無題のスプレッドシート"
+  },
+  "slides": {
+    "title": "NextOffice Slides",
+    "toolbar": {
+      "new": "新規",
+      "open": "開く",
+      "save": "保存",
+      "export": "エクスポート",
+      "newSlide": "新しいスライド",
+      "deleteSlide": "スライドを削除",
+      "duplicateSlide": "スライドを複製",
+      "addText": "テキストを追加",
+      "addImage": "画像を追加",
+      "addShape": "図形を追加",
+      "template": "テンプレート",
+      "present": "プレゼンテーション"
+    },
+    "statusBar": {
+      "slide": "スライド",
+      "of": "/"
+    },
+    "templates": {
+      "blank": "白紙のプレゼンテーション",
+      "business": "ビジネス",
+      "academic": "アカデミック",
+      "creative": "クリエイティブ"
+    },
+    "transitions": {
+      "none": "なし",
+      "fade": "フェード",
+      "slide": "スライド"
+    },
+    "export": {
+      "title": "プレゼンテーションをエクスポート",
+      "pdf": "PDF",
+      "pptx": "PPTX"
+    },
+    "presentation": {
+      "mode": "プレゼンテーションモード",
+      "exit": "終了 (ESC)",
+      "previous": "前へ",
+      "next": "次へ"
+    },
+    "untitled": "無題のプレゼンテーション"
   }
 }

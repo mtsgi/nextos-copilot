@@ -9,7 +9,10 @@
     "terminal": "Terminal",
     "textEditor": "Text Editor",
     "settings": "Settings",
-    "controlCenter": "Control Center"
+    "controlCenter": "Control Center",
+    "writer": "NextOffice Writer",
+    "calc": "NextOffice Calc",
+    "slides": "NextOffice Slides"
   },
   "fileManager": {
     "title": "Files",
@@ -143,5 +146,147 @@
       "screenshot": "Screenshot",
       "lock": "Lock Screen"
     }
+  },
+  "writer": {
+    "title": "NextOffice Writer",
+    "toolbar": {
+      "new": "New",
+      "open": "Open",
+      "save": "Save",
+      "export": "Export",
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strikethrough": "Strikethrough",
+      "alignLeft": "Align Left",
+      "alignCenter": "Align Center",
+      "alignRight": "Align Right",
+      "alignJustify": "Justify",
+      "bulletList": "Bullet List",
+      "numberedList": "Numbered List",
+      "undo": "Undo",
+      "redo": "Redo",
+      "font": "Font",
+      "fontSize": "Font Size",
+      "textColor": "Text Color",
+      "backgroundColor": "Background Color",
+      "template": "Template"
+    },
+    "statusBar": {
+      "words": "Words",
+      "characters": "Characters",
+      "pages": "Pages"
+    },
+    "templates": {
+      "blank": "Blank Document",
+      "letter": "Letter",
+      "resume": "Resume",
+      "report": "Report"
+    },
+    "export": {
+      "title": "Export Document",
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "txt": "Plain Text"
+    },
+    "placeholder": "Start writing your document...",
+    "untitled": "Untitled Document",
+    "modified": "*"
+  },
+  "calc": {
+    "title": "NextOffice Calc",
+    "toolbar": {
+      "new": "New",
+      "open": "Open",
+      "save": "Save",
+      "export": "Export",
+      "bold": "Bold",
+      "italic": "Italic",
+      "alignLeft": "Align Left",
+      "alignCenter": "Align Center",
+      "alignRight": "Align Right",
+      "addChart": "Insert Chart",
+      "function": "Insert Function",
+      "sort": "Sort",
+      "filter": "Filter",
+      "merge": "Merge Cells",
+      "format": "Format Cells"
+    },
+    "statusBar": {
+      "cell": "Cell",
+      "sum": "Sum",
+      "average": "Average",
+      "count": "Count"
+    },
+    "sheets": {
+      "new": "New Sheet",
+      "rename": "Rename",
+      "delete": "Delete",
+      "sheet": "Sheet"
+    },
+    "functions": {
+      "sum": "SUM",
+      "average": "AVERAGE",
+      "count": "COUNT",
+      "max": "MAX",
+      "min": "MIN",
+      "if": "IF"
+    },
+    "charts": {
+      "bar": "Bar Chart",
+      "line": "Line Chart",
+      "pie": "Pie Chart",
+      "scatter": "Scatter Plot"
+    },
+    "export": {
+      "title": "Export Spreadsheet",
+      "xlsx": "XLSX",
+      "csv": "CSV"
+    },
+    "untitled": "Untitled Spreadsheet"
+  },
+  "slides": {
+    "title": "NextOffice Slides",
+    "toolbar": {
+      "new": "New",
+      "open": "Open",
+      "save": "Save",
+      "export": "Export",
+      "newSlide": "New Slide",
+      "deleteSlide": "Delete Slide",
+      "duplicateSlide": "Duplicate Slide",
+      "addText": "Add Text",
+      "addImage": "Add Image",
+      "addShape": "Add Shape",
+      "template": "Template",
+      "present": "Present"
+    },
+    "statusBar": {
+      "slide": "Slide",
+      "of": "of"
+    },
+    "templates": {
+      "blank": "Blank Presentation",
+      "business": "Business",
+      "academic": "Academic",
+      "creative": "Creative"
+    },
+    "transitions": {
+      "none": "None",
+      "fade": "Fade",
+      "slide": "Slide"
+    },
+    "export": {
+      "title": "Export Presentation",
+      "pdf": "PDF",
+      "pptx": "PPTX"
+    },
+    "presentation": {
+      "mode": "Presentation Mode",
+      "exit": "Exit (ESC)",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "untitled": "Untitled Presentation"
   }
 }
