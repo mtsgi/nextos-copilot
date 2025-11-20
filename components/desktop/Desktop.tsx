@@ -10,6 +10,7 @@ import FileManager from '@/components/apps/FileManager';
 import Terminal from '@/components/apps/Terminal';
 import TextEditor from '@/components/apps/TextEditor';
 import Settings from '@/components/apps/Settings';
+import ControlCenter from '@/components/apps/ControlCenter';
 import type { WindowState, Application } from '@/types';
 
 const applications: Application[] = [
@@ -39,6 +40,13 @@ const applications: Application[] = [
     name: 'apps.settings',
     icon: '⚙️',
     component: Settings,
+    category: 'system',
+  },
+  {
+    id: 'control-center',
+    name: 'apps.controlCenter',
+    icon: '🎛️',
+    component: ControlCenter,
     category: 'system',
   },
 ];

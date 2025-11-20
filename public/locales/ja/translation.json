@@ -8,7 +8,8 @@
     "files": "ファイル",
     "terminal": "ターミナル",
     "textEditor": "テキストエディタ",
-    "settings": "設定"
+    "settings": "設定",
+    "controlCenter": "コントロールセンター"
   },
   "fileManager": {
     "title": "ファイル",
@@ -112,6 +113,35 @@
       "title": "NextOSについて",
       "version": "バージョン",
       "description": "Next.jsとTypeScriptで構築されたWebベースのオペレーティングシステム"
+    }
+  },
+  "controlCenter": {
+    "title": "コントロールセンター",
+    "systemStatus": {
+      "title": "システムステータス",
+      "battery": "バッテリー",
+      "network": "ネットワーク",
+      "volume": "音量",
+      "charging": "充電中",
+      "notAvailable": "利用不可",
+      "online": "オンライン",
+      "offline": "オフライン"
+    },
+    "quickToggles": {
+      "title": "クイックトグル",
+      "darkMode": "ダークモード",
+      "doNotDisturb": "おやすみモード",
+      "airplaneMode": "機内モード"
+    },
+    "sliderControls": {
+      "title": "コントロール",
+      "brightness": "明るさ",
+      "volume": "音量"
+    },
+    "quickActions": {
+      "title": "クイックアクション",
+      "screenshot": "スクリーンショット",
+      "lock": "画面ロック"
     }
   }
 }
