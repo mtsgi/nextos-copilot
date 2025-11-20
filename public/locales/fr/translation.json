@@ -8,7 +8,8 @@
     "files": "Fichiers",
     "terminal": "Terminal",
     "textEditor": "Éditeur de Texte",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "controlCenter": "Centre de Contrôle"
   },
   "fileManager": {
     "title": "Fichiers",
@@ -112,6 +113,35 @@
       "title": "À propos de NextOS",
       "version": "Version",
       "description": "Un système d'exploitation basé sur le web construit avec Next.js et TypeScript"
+    }
+  },
+  "controlCenter": {
+    "title": "Centre de Contrôle",
+    "systemStatus": {
+      "title": "État du Système",
+      "battery": "Batterie",
+      "network": "Réseau",
+      "volume": "Volume",
+      "charging": "En charge",
+      "notAvailable": "N/D",
+      "online": "En ligne",
+      "offline": "Hors ligne"
+    },
+    "quickToggles": {
+      "title": "Basculements Rapides",
+      "darkMode": "Mode Sombre",
+      "doNotDisturb": "Ne Pas Déranger",
+      "airplaneMode": "Mode Avion"
+    },
+    "sliderControls": {
+      "title": "Contrôles",
+      "brightness": "Luminosité",
+      "volume": "Volume"
+    },
+    "quickActions": {
+      "title": "Actions Rapides",
+      "screenshot": "Capture d'Écran",
+      "lock": "Verrouiller l'Écran"
     }
   }
 }

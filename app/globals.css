@@ -41,6 +41,22 @@ body {
   animation: slide-up 0.3s ease-out;
 }
 
+/* Control Center slide-down animation */
+@keyframes slide-down {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.2s ease-out;
+}
+
 /* Safe area padding for mobile */
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 1rem);

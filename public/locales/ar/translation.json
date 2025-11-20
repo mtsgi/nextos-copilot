@@ -8,7 +8,8 @@
     "files": "الملفات",
     "terminal": "الطرفية",
     "textEditor": "محرر النصوص",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "controlCenter": "مركز التحكم"
   },
   "fileManager": {
     "title": "الملفات",
@@ -112,6 +113,35 @@
       "title": "حول NextOS",
       "version": "الإصدار",
       "description": "نظام تشغيل قائم على الويب مبني باستخدام Next.js و TypeScript"
+    }
+  },
+  "controlCenter": {
+    "title": "مركز التحكم",
+    "systemStatus": {
+      "title": "حالة النظام",
+      "battery": "البطارية",
+      "network": "الشبكة",
+      "volume": "مستوى الصوت",
+      "charging": "جاري الشحن",
+      "notAvailable": "غير متوفر",
+      "online": "متصل",
+      "offline": "غير متصل"
+    },
+    "quickToggles": {
+      "title": "التبديل السريع",
+      "darkMode": "الوضع الداكن",
+      "doNotDisturb": "عدم الإزعاج",
+      "airplaneMode": "وضع الطيران"
+    },
+    "sliderControls": {
+      "title": "عناصر التحكم",
+      "brightness": "السطوع",
+      "volume": "مستوى الصوت"
+    },
+    "quickActions": {
+      "title": "الإجراءات السريعة",
+      "screenshot": "لقطة شاشة",
+      "lock": "قفل الشاشة"
     }
   }
 }
