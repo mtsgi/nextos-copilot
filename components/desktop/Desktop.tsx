@@ -42,13 +42,6 @@ const applications: Application[] = [
     component: Settings,
     category: 'system',
   },
-  {
-    id: 'control-center',
-    name: 'apps.controlCenter',
-    icon: '🎛️',
-    component: ControlCenter,
-    category: 'system',
-  },
 ];
 
 export default function Desktop() {
@@ -58,6 +51,7 @@ export default function Desktop() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isMobile, setIsMobile] = useState(false);
   const [showMobileAppDrawer, setShowMobileAppDrawer] = useState(false);
+  const [showControlCenter, setShowControlCenter] = useState(false);
 
   useEffect(() => {
     // Update clock every second
@@ -246,6 +240,14 @@ export default function Desktop() {
 
           {/* System Tray */}
           <div className="flex items-center gap-2 text-white text-sm">
+            {/* Control Center Button */}
+            <button
+              className="w-8 h-8 flex items-center justify-center rounded hover:bg-white/10 transition-colors text-xl"
+              onClick={() => setShowControlCenter(!showControlCenter)}
+              title={t('apps.controlCenter')}
+            >
+              🎛️
+            </button>
             <div>{currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
           </div>
         </div>
@@ -273,6 +275,35 @@ export default function Desktop() {
               ))}
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Control Center Panel */}
+      {showControlCenter && (
+        <div 
+          className="fixed inset-0 z-50" 
+          onClick={() => setShowControlCenter(false)}
+        >
+          {/* Desktop: Top-right panel like macOS */}
+          {!isMobile && (
+            <div
+              className="absolute top-14 right-4 w-96 max-h-[calc(100vh-5rem)] bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-y-auto animate-slide-down"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ControlCenter windowId="" onClose={() => setShowControlCenter(false)} />
+            </div>
+          )}
+          
+          {/* Mobile: Bottom sheet like iOS */}
+          {isMobile && (
+            <div
+              className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl rounded-t-3xl max-h-[85vh] overflow-y-auto animate-slide-up"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="w-12 h-1 bg-gray-400 rounded-full mx-auto mt-3 mb-2" />
+              <ControlCenter windowId="" onClose={() => setShowControlCenter(false)} />
+            </div>
+          )}
         </div>
       )}
     </div>
