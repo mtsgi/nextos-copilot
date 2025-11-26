@@ -4,8 +4,10 @@ import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppProps } from '@/types';
 import { CellData, Sheet } from '@/types/nextoffice';
+import { vfs } from '@/lib/filesystem';
 import OfficeToolbar, { ToolbarButton } from '@/components/nextoffice/common/OfficeToolbar';
 import OfficeStatusBar from '@/components/nextoffice/common/OfficeStatusBar';
+import SaveModal from '@/components/nextoffice/common/SaveModal';
 
 const ROWS = 20;
 const COLS = 10;
@@ -23,7 +25,7 @@ const AVAILABLE_FUNCTIONS = [
 
 export default function Calc({ windowId: _windowId }: AppProps) {
   const { t } = useTranslation();
-  const [fileName] = useState(t('calc.untitled'));
+  const [fileName, setFileName] = useState(t('calc.untitled'));
   const [sheets, setSheets] = useState<Sheet[]>([
     { id: '1', name: `${t('calc.sheets.sheet')} 1`, cells: new Map() },
   ]);
@@ -31,6 +33,7 @@ export default function Calc({ windowId: _windowId }: AppProps) {
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [editingCell, setEditingCell] = useState<{ row: number; col: number } | null>(null);
   const [showFunctionPicker, setShowFunctionPicker] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const activeSheet = sheets[activeSheetIndex];
@@ -152,8 +155,43 @@ export default function Calc({ windowId: _windowId }: AppProps) {
     setShowFunctionPicker(false);
   };
 
+  const handleSaveToFilesystem = async (path: string, name: string) => {
+    try {
+      await vfs.init();
+      
+      // Convert sheets data to JSON for storage
+      const sheetsData = sheets.map(sheet => ({
+        id: sheet.id,
+        name: sheet.name,
+        cells: Object.fromEntries(sheet.cells),
+      }));
+      
+      const content = JSON.stringify({ sheets: sheetsData }, null, 2);
+      const parentNode = await vfs.readNodeByPath(path);
+      const filePath = `${path}/${name}`;
+      
+      // Check if file exists
+      const existingFile = await vfs.readNodeByPath(filePath);
+      
+      if (existingFile) {
+        existingFile.content = content;
+        existingFile.modifiedAt = new Date();
+        existingFile.size = new Blob([content]).size;
+        await vfs.updateNode(existingFile);
+      } else {
+        await vfs.createFile(filePath, content, parentNode?.id || null);
+      }
+      
+      setFileName(name);
+      alert(t('saveModal.savedSuccess'));
+    } catch (error) {
+      console.error('Failed to save file:', error);
+      alert(t('saveModal.savedError'));
+    }
+  };
+
   const toolbarButtons: ToolbarButton[] = [
-    { id: 'save', icon: '💾', label: t('calc.toolbar.save'), onClick: () => console.log('Save') },
+    { id: 'save', icon: '💾', label: t('calc.toolbar.save'), onClick: () => setShowSaveModal(true) },
     { id: 'export', icon: '📤', label: t('calc.toolbar.export'), onClick: () => alert(t('calc.export.title')) },
     { id: 'sep1', icon: '', label: '', onClick: () => {}, separator: true },
     { id: 'bold', icon: '𝐁', label: t('calc.toolbar.bold'), onClick: () => console.log('Bold') },
@@ -290,6 +328,16 @@ export default function Calc({ windowId: _windowId }: AppProps) {
           </div>
         </div>
       )}
+
+      {/* Save Modal */}
+      <SaveModal
+        isOpen={showSaveModal}
+        onClose={() => setShowSaveModal(false)}
+        onSave={handleSaveToFilesystem}
+        defaultFileName={fileName.endsWith('.json') ? fileName.replace('.json', '') : fileName}
+        fileExtension=".json"
+        appType="calc"
+      />
     </div>
   );
 }

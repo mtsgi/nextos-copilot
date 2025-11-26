@@ -4,13 +4,16 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppProps } from '@/types';
 import { Slide } from '@/types/nextoffice';
+import { vfs } from '@/lib/filesystem';
 import OfficeToolbar, { ToolbarButton } from '@/components/nextoffice/common/OfficeToolbar';
 import OfficeStatusBar from '@/components/nextoffice/common/OfficeStatusBar';
+import SaveModal from '@/components/nextoffice/common/SaveModal';
 
 export default function Slides({ windowId: _windowId }: AppProps) {
   const { t } = useTranslation();
-  const [fileName] = useState(t('slides.untitled'));
+  const [fileName, setFileName] = useState(t('slides.untitled'));
   const [presentationMode, setPresentationMode] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
   const [slides, setSlides] = useState<Slide[]>([
     {
       id: '1',
@@ -94,8 +97,50 @@ export default function Slides({ windowId: _windowId }: AppProps) {
     }
   };
 
+  const handleSaveToFilesystem = async (path: string, name: string) => {
+    try {
+      await vfs.init();
+      
+      // Convert slides data to JSON for storage
+      const slidesData = slides.map(slide => ({
+        id: slide.id,
+        order: slide.order,
+        title: slide.title,
+        content: slide.content,
+        background: slide.background,
+        transition: slide.transition,
+      }));
+      
+      const content = JSON.stringify({ 
+        slides: slidesData,
+        currentTitle: slideTitle,
+        currentContent: slideContent 
+      }, null, 2);
+      const parentNode = await vfs.readNodeByPath(path);
+      const filePath = `${path}/${name}`;
+      
+      // Check if file exists
+      const existingFile = await vfs.readNodeByPath(filePath);
+      
+      if (existingFile) {
+        existingFile.content = content;
+        existingFile.modifiedAt = new Date();
+        existingFile.size = new Blob([content]).size;
+        await vfs.updateNode(existingFile);
+      } else {
+        await vfs.createFile(filePath, content, parentNode?.id || null);
+      }
+      
+      setFileName(name);
+      alert(t('saveModal.savedSuccess'));
+    } catch (error) {
+      console.error('Failed to save file:', error);
+      alert(t('saveModal.savedError'));
+    }
+  };
+
   const toolbarButtons: ToolbarButton[] = [
-    { id: 'save', icon: '💾', label: t('slides.toolbar.save'), onClick: () => console.log('Save') },
+    { id: 'save', icon: '💾', label: t('slides.toolbar.save'), onClick: () => setShowSaveModal(true) },
     { id: 'export', icon: '📤', label: t('slides.toolbar.export'), onClick: () => alert(t('slides.export.title')) },
     { id: 'sep1', icon: '', label: '', onClick: () => {}, separator: true },
     { id: 'newSlide', icon: '➕', label: t('slides.toolbar.newSlide'), onClick: addSlide },
@@ -298,6 +343,16 @@ export default function Slides({ windowId: _windowId }: AppProps) {
             value: `${currentSlideIndex + 1} ${t('slides.statusBar.of')} ${slides.length}`,
           },
         ]}
+      />
+
+      {/* Save Modal */}
+      <SaveModal
+        isOpen={showSaveModal}
+        onClose={() => setShowSaveModal(false)}
+        onSave={handleSaveToFilesystem}
+        defaultFileName={fileName.endsWith('.json') ? fileName.replace('.json', '') : fileName}
+        fileExtension=".json"
+        appType="slides"
       />
     </div>
   );

@@ -288,5 +288,17 @@
       "next": "Next"
     },
     "untitled": "Untitled Presentation"
+  },
+  "saveModal": {
+    "title": "Save {{app}}",
+    "goUp": "Up",
+    "loading": "Loading...",
+    "noFolders": "No folders",
+    "fileName": "File Name",
+    "fileNamePlaceholder": "Enter file name",
+    "cancel": "Cancel",
+    "save": "Save",
+    "savedSuccess": "File saved successfully",
+    "savedError": "Failed to save file"
   }
 }

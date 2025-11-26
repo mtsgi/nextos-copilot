@@ -288,5 +288,17 @@
       "next": "次へ"
     },
     "untitled": "無題のプレゼンテーション"
+  },
+  "saveModal": {
+    "title": "{{app}}を保存",
+    "goUp": "上へ",
+    "loading": "読み込み中...",
+    "noFolders": "フォルダがありません",
+    "fileName": "ファイル名",
+    "fileNamePlaceholder": "ファイル名を入力",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "savedSuccess": "ファイルを保存しました",
+    "savedError": "ファイルの保存に失敗しました"
   }
 }

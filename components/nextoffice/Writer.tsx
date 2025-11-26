@@ -3,8 +3,10 @@
 import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppProps } from '@/types';
+import { vfs } from '@/lib/filesystem';
 import OfficeToolbar, { ToolbarButton, ToolbarDropdown } from '@/components/nextoffice/common/OfficeToolbar';
 import OfficeStatusBar from '@/components/nextoffice/common/OfficeStatusBar';
+import SaveModal from '@/components/nextoffice/common/SaveModal';
 
 interface TextFormat {
   bold: boolean;
@@ -21,6 +23,7 @@ export default function Writer({ windowId: _windowId }: AppProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const [fileName, setFileName] = useState(t('writer.untitled'));
   const [isSaved, setIsSaved] = useState(true);
+  const [showSaveModal, setShowSaveModal] = useState(false);
   const [format, setFormat] = useState<TextFormat>({
     bold: false,
     italic: false,
@@ -77,8 +80,37 @@ export default function Writer({ windowId: _windowId }: AppProps) {
   };
 
   const handleSave = () => {
-    setIsSaved(true);
-    console.log('Document saved:', fileName);
+    setShowSaveModal(true);
+  };
+
+  const handleSaveToFilesystem = async (path: string, name: string) => {
+    try {
+      await vfs.init();
+      const content = editorRef.current?.innerHTML || '';
+      const parentNode = await vfs.readNodeByPath(path);
+      const filePath = `${path}/${name}`;
+      
+      // Check if file exists
+      const existingFile = await vfs.readNodeByPath(filePath);
+      
+      if (existingFile) {
+        // Update existing file
+        existingFile.content = content;
+        existingFile.modifiedAt = new Date();
+        existingFile.size = new Blob([content]).size;
+        await vfs.updateNode(existingFile);
+      } else {
+        // Create new file
+        await vfs.createFile(filePath, content, parentNode?.id || null);
+      }
+      
+      setFileName(name);
+      setIsSaved(true);
+      alert(t('saveModal.savedSuccess'));
+    } catch (error) {
+      console.error('Failed to save file:', error);
+      alert(t('saveModal.savedError'));
+    }
   };
 
   const handleExport = (format: 'pdf' | 'docx' | 'txt') => {
@@ -148,7 +180,7 @@ export default function Writer({ windowId: _windowId }: AppProps) {
   };
 
   return (
-    <div className="h-full flex flex-col bg-white">
+    <div className="h-full flex flex-col bg-white relative">
       {/* Toolbar - Responsive wrapping on mobile */}
       <OfficeToolbar buttons={toolbarButtons} dropdowns={toolbarDropdowns}>
         <div className="flex-1" />
@@ -204,6 +236,16 @@ export default function Writer({ windowId: _windowId }: AppProps) {
           { id: 'characters', label: t('writer.statusBar.characters'), value: getCharacterCount().toString() },
           { id: 'pages', label: t('writer.statusBar.pages'), value: '1' },
         ]}
+      />
+
+      {/* Save Modal */}
+      <SaveModal
+        isOpen={showSaveModal}
+        onClose={() => setShowSaveModal(false)}
+        onSave={handleSaveToFilesystem}
+        defaultFileName={fileName.endsWith('.html') ? fileName.replace('.html', '') : fileName}
+        fileExtension=".html"
+        appType="writer"
       />
     </div>
   );
