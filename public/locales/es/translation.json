@@ -9,7 +9,10 @@
     "terminal": "Terminal",
     "textEditor": "Editor de Texto",
     "settings": "Configuración",
-    "controlCenter": "Centro de Control"
+    "controlCenter": "Centro de Control",
+    "writer": "NextOffice Writer",
+    "calc": "NextOffice Calc",
+    "slides": "NextOffice Slides"
   },
   "fileManager": {
     "title": "Archivos",

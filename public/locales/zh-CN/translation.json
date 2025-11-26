@@ -9,7 +9,10 @@
     "terminal": "终端",
     "textEditor": "文本编辑器",
     "settings": "设置",
-    "controlCenter": "控制中心"
+    "controlCenter": "控制中心",
+    "writer": "NextOffice Writer",
+    "calc": "NextOffice Calc",
+    "slides": "NextOffice Slides"
   },
   "fileManager": {
     "title": "文件",
