@@ -7,6 +7,7 @@ import { vfs } from '@/lib/filesystem';
 import OfficeToolbar, { ToolbarButton, ToolbarDropdown } from '@/components/nextoffice/common/OfficeToolbar';
 import OfficeStatusBar from '@/components/nextoffice/common/OfficeStatusBar';
 import SaveModal from '@/components/nextoffice/common/SaveModal';
+import OpenModal from '@/components/nextoffice/common/OpenModal';
 
 interface TextFormat {
   bold: boolean;
@@ -24,6 +25,7 @@ export default function Writer({ windowId: _windowId }: AppProps) {
   const [fileName, setFileName] = useState(t('writer.untitled'));
   const [isSaved, setIsSaved] = useState(true);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showOpenModal, setShowOpenModal] = useState(false);
   const [format, setFormat] = useState<TextFormat>({
     bold: false,
     italic: false,
@@ -83,6 +85,22 @@ export default function Writer({ windowId: _windowId }: AppProps) {
     setShowSaveModal(true);
   };
 
+  const handleOpenFile = () => {
+    if (!isSaved && !confirm(t('textEditor.unsavedChanges'))) {
+      return;
+    }
+    setShowOpenModal(true);
+  };
+
+  const handleOpenFromFilesystem = (filePath: string, content: string) => {
+    if (editorRef.current) {
+      editorRef.current.innerHTML = content;
+    }
+    const name = filePath.split('/').pop() || t('writer.untitled');
+    setFileName(name);
+    setIsSaved(true);
+  };
+
   const handleSaveToFilesystem = async (path: string, name: string) => {
     try {
       await vfs.init();
@@ -121,6 +139,7 @@ export default function Writer({ windowId: _windowId }: AppProps) {
 
   const toolbarButtons: ToolbarButton[] = [
     { id: 'new', icon: '📄', label: t('writer.toolbar.new'), onClick: handleNew },
+    { id: 'open', icon: '📂', label: t('writer.toolbar.open'), onClick: handleOpenFile },
     { id: 'save', icon: '💾', label: t('writer.toolbar.save'), onClick: handleSave },
     { id: 'sep1', icon: '', label: '', onClick: () => {}, separator: true },
     { id: 'bold', icon: '𝐁', label: t('writer.toolbar.bold'), onClick: () => handleFormat('bold'), active: format.bold },
@@ -245,6 +264,15 @@ export default function Writer({ windowId: _windowId }: AppProps) {
         onSave={handleSaveToFilesystem}
         defaultFileName={fileName.endsWith('.html') ? fileName.replace('.html', '') : fileName}
         fileExtension=".html"
+        appType="writer"
+      />
+
+      {/* Open Modal */}
+      <OpenModal
+        isOpen={showOpenModal}
+        onClose={() => setShowOpenModal(false)}
+        onOpen={handleOpenFromFilesystem}
+        fileExtensions={['.html', '.txt']}
         appType="writer"
       />
     </div>

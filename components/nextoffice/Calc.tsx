@@ -8,6 +8,7 @@ import { vfs } from '@/lib/filesystem';
 import OfficeToolbar, { ToolbarButton } from '@/components/nextoffice/common/OfficeToolbar';
 import OfficeStatusBar from '@/components/nextoffice/common/OfficeStatusBar';
 import SaveModal from '@/components/nextoffice/common/SaveModal';
+import OpenModal from '@/components/nextoffice/common/OpenModal';
 
 const ROWS = 20;
 const COLS = 10;
@@ -34,6 +35,7 @@ export default function Calc({ windowId: _windowId }: AppProps) {
   const [editingCell, setEditingCell] = useState<{ row: number; col: number } | null>(null);
   const [showFunctionPicker, setShowFunctionPicker] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showOpenModal, setShowOpenModal] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const activeSheet = sheets[activeSheetIndex];
@@ -190,8 +192,29 @@ export default function Calc({ windowId: _windowId }: AppProps) {
     }
   };
 
+  const handleOpenFromFilesystem = (filePath: string, content: string) => {
+    try {
+      const data = JSON.parse(content);
+      if (data.sheets && Array.isArray(data.sheets)) {
+        const loadedSheets: Sheet[] = data.sheets.map((sheetData: { id: string; name: string; cells: Record<string, CellData> }) => ({
+          id: sheetData.id,
+          name: sheetData.name,
+          cells: new Map(Object.entries(sheetData.cells)),
+        }));
+        setSheets(loadedSheets);
+        setActiveSheetIndex(0);
+      }
+      const name = filePath.split('/').pop() || t('calc.untitled');
+      setFileName(name);
+    } catch (error) {
+      console.error('Failed to parse file:', error);
+      alert(t('openModal.readError'));
+    }
+  };
+
   const toolbarButtons: ToolbarButton[] = [
     { id: 'save', icon: '💾', label: t('calc.toolbar.save'), onClick: () => setShowSaveModal(true) },
+    { id: 'open', icon: '📂', label: t('calc.toolbar.open'), onClick: () => setShowOpenModal(true) },
     { id: 'export', icon: '📤', label: t('calc.toolbar.export'), onClick: () => alert(t('calc.export.title')) },
     { id: 'sep1', icon: '', label: '', onClick: () => {}, separator: true },
     { id: 'bold', icon: '𝐁', label: t('calc.toolbar.bold'), onClick: () => console.log('Bold') },
@@ -336,6 +359,15 @@ export default function Calc({ windowId: _windowId }: AppProps) {
         onSave={handleSaveToFilesystem}
         defaultFileName={fileName.endsWith('.json') ? fileName.replace('.json', '') : fileName}
         fileExtension=".json"
+        appType="calc"
+      />
+
+      {/* Open Modal */}
+      <OpenModal
+        isOpen={showOpenModal}
+        onClose={() => setShowOpenModal(false)}
+        onOpen={handleOpenFromFilesystem}
+        fileExtensions={['.json']}
         appType="calc"
       />
     </div>

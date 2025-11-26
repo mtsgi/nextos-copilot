@@ -302,5 +302,19 @@
     "savedError": "Failed to save file",
     "loadError": "Failed to load directories",
     "fileNameRequired": "Please enter a file name"
+  },
+  "openModal": {
+    "title": "Open {{app}}",
+    "goUp": "Up",
+    "loading": "Loading...",
+    "noFiles": "No files found",
+    "selectedFile": "Selected File",
+    "noFileSelected": "No file selected",
+    "cancel": "Cancel",
+    "open": "Open",
+    "loadError": "Failed to load files",
+    "readError": "Failed to read file",
+    "selectFileRequired": "Please select a file to open",
+    "openedSuccess": "File opened successfully"
   }
 }

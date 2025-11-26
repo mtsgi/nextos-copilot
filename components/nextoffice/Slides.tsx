@@ -8,12 +8,14 @@ import { vfs } from '@/lib/filesystem';
 import OfficeToolbar, { ToolbarButton } from '@/components/nextoffice/common/OfficeToolbar';
 import OfficeStatusBar from '@/components/nextoffice/common/OfficeStatusBar';
 import SaveModal from '@/components/nextoffice/common/SaveModal';
+import OpenModal from '@/components/nextoffice/common/OpenModal';
 
 export default function Slides({ windowId: _windowId }: AppProps) {
   const { t } = useTranslation();
   const [fileName, setFileName] = useState(t('slides.untitled'));
   const [presentationMode, setPresentationMode] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showOpenModal, setShowOpenModal] = useState(false);
   const [slides, setSlides] = useState<Slide[]>([
     {
       id: '1',
@@ -139,8 +141,26 @@ export default function Slides({ windowId: _windowId }: AppProps) {
     }
   };
 
+  const handleOpenFromFilesystem = (filePath: string, content: string) => {
+    try {
+      const data = JSON.parse(content);
+      if (data.slides && Array.isArray(data.slides)) {
+        setSlides(data.slides);
+        setCurrentSlideIndex(0);
+        if (data.currentTitle) setSlideTitle(data.currentTitle);
+        if (data.currentContent) setSlideContent(data.currentContent);
+      }
+      const name = filePath.split('/').pop() || t('slides.untitled');
+      setFileName(name);
+    } catch (error) {
+      console.error('Failed to parse file:', error);
+      alert(t('openModal.readError'));
+    }
+  };
+
   const toolbarButtons: ToolbarButton[] = [
     { id: 'save', icon: '💾', label: t('slides.toolbar.save'), onClick: () => setShowSaveModal(true) },
+    { id: 'open', icon: '📂', label: t('slides.toolbar.open'), onClick: () => setShowOpenModal(true) },
     { id: 'export', icon: '📤', label: t('slides.toolbar.export'), onClick: () => alert(t('slides.export.title')) },
     { id: 'sep1', icon: '', label: '', onClick: () => {}, separator: true },
     { id: 'newSlide', icon: '➕', label: t('slides.toolbar.newSlide'), onClick: addSlide },
@@ -352,6 +372,15 @@ export default function Slides({ windowId: _windowId }: AppProps) {
         onSave={handleSaveToFilesystem}
         defaultFileName={fileName.endsWith('.json') ? fileName.replace('.json', '') : fileName}
         fileExtension=".json"
+        appType="slides"
+      />
+
+      {/* Open Modal */}
+      <OpenModal
+        isOpen={showOpenModal}
+        onClose={() => setShowOpenModal(false)}
+        onOpen={handleOpenFromFilesystem}
+        fileExtensions={['.json']}
         appType="slides"
       />
     </div>
