@@ -299,6 +299,8 @@
     "cancel": "キャンセル",
     "save": "保存",
     "savedSuccess": "ファイルを保存しました",
-    "savedError": "ファイルの保存に失敗しました"
+    "savedError": "ファイルの保存に失敗しました",
+    "loadError": "ディレクトリの読み込みに失敗しました",
+    "fileNameRequired": "ファイル名を入力してください"
   }
 }

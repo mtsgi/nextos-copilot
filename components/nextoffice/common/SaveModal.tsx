@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { vfs } from '@/lib/filesystem';
 import { FileSystemNode } from '@/types';
@@ -29,7 +29,7 @@ export default function SaveModal({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const loadDirectories = async (path: string) => {
+  const loadDirectories = useCallback(async (path: string) => {
     setLoading(true);
     setError(null);
     try {
@@ -43,19 +43,19 @@ export default function SaveModal({
         setDirectories(dirs);
       }
     } catch (err) {
-      setError('Failed to load directories');
+      setError(t('saveModal.loadError'));
       console.error(err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [t]);
 
   useEffect(() => {
     if (isOpen) {
       setFileName(defaultFileName);
       loadDirectories(currentPath);
     }
-  }, [isOpen, currentPath, defaultFileName]);
+  }, [isOpen, currentPath, defaultFileName, loadDirectories]);
 
   const handleNavigate = (path: string) => {
     setCurrentPath(path);
@@ -73,7 +73,7 @@ export default function SaveModal({
 
   const handleSave = () => {
     if (!fileName.trim()) {
-      setError('Please enter a file name');
+      setError(t('saveModal.fileNameRequired'));
       return;
     }
     

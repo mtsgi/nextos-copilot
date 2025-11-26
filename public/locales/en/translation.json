@@ -299,6 +299,8 @@
     "cancel": "Cancel",
     "save": "Save",
     "savedSuccess": "File saved successfully",
-    "savedError": "Failed to save file"
+    "savedError": "Failed to save file",
+    "loadError": "Failed to load directories",
+    "fileNameRequired": "Please enter a file name"
   }
 }
