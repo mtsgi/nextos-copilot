@@ -149,11 +149,11 @@ export default function Writer({ windowId: _windowId }: AppProps) {
 
   return (
     <div className="h-full flex flex-col bg-white">
-      {/* Toolbar */}
+      {/* Toolbar - Responsive wrapping on mobile */}
       <OfficeToolbar buttons={toolbarButtons} dropdowns={toolbarDropdowns}>
         <div className="flex-1" />
         <button
-          className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600 transition-colors"
+          className="px-2 sm:px-3 py-1 bg-green-500 text-white rounded text-xs sm:text-sm hover:bg-green-600 transition-colors"
           onClick={() => {
             const exportMenu = document.createElement('select');
             exportMenu.innerHTML = `
@@ -169,21 +169,21 @@ export default function Writer({ windowId: _windowId }: AppProps) {
             exportMenu.click();
           }}
         >
-          📤 {t('writer.toolbar.export')}
+          📤 <span className="hidden sm:inline">{t('writer.toolbar.export')}</span>
         </button>
-        <div className="text-sm text-gray-600 ml-2">
+        <div className="text-xs sm:text-sm text-gray-600 ml-2 truncate max-w-[100px] sm:max-w-none">
           {fileName}
           {!isSaved && ' ' + t('writer.modified')}
         </div>
       </OfficeToolbar>
 
-      {/* Editor */}
+      {/* Editor - Full width on mobile with less padding */}
       <div className="flex-1 overflow-auto">
-        <div className="max-w-4xl mx-auto p-8 md:p-12">
+        <div className="max-w-4xl mx-auto p-4 sm:p-8 md:p-12">
           <div
             ref={editorRef}
             contentEditable
-            className="min-h-[500px] outline-none focus:outline-none bg-white"
+            className="min-h-[300px] sm:min-h-[500px] outline-none focus:outline-none bg-white"
             style={{
               fontFamily: format.fontFamily,
               fontSize: format.fontSize,
@@ -197,7 +197,7 @@ export default function Writer({ windowId: _windowId }: AppProps) {
         </div>
       </div>
 
-      {/* Status Bar */}
+      {/* Status Bar - Compact on mobile */}
       <OfficeStatusBar
         items={[
           { id: 'words', label: t('writer.statusBar.words'), value: getWordCount().toString() },

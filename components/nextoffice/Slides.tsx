@@ -117,44 +117,44 @@ export default function Slides({ windowId: _windowId }: AppProps) {
       >
         <div className="w-full h-full flex flex-col">
           {/* Presentation Slide */}
-          <div className="flex-1 flex items-center justify-center p-8">
+          <div className="flex-1 flex items-center justify-center p-2 sm:p-8">
             <div
-              className="w-full h-full max-w-6xl max-h-[80vh] rounded-lg shadow-2xl flex flex-col items-center justify-center p-12"
+              className="w-full h-full max-w-6xl max-h-[80vh] rounded-lg shadow-2xl flex flex-col items-center justify-center p-4 sm:p-12"
               style={{ backgroundColor: currentSlide.background }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold text-gray-800 mb-8 text-center">
+              <h1 className="text-2xl sm:text-5xl md:text-7xl font-bold text-gray-800 mb-4 sm:mb-8 text-center">
                 {slideTitle || currentSlide.title}
               </h1>
-              <p className="text-2xl md:text-3xl text-gray-600 text-center max-w-4xl">
+              <p className="text-base sm:text-2xl md:text-3xl text-gray-600 text-center max-w-4xl">
                 {slideContent}
               </p>
             </div>
           </div>
 
-          {/* Presentation Controls */}
-          <div className="bg-gray-900/90 backdrop-blur-sm p-4 flex items-center justify-between">
+          {/* Presentation Controls - Compact on mobile */}
+          <div className="bg-gray-900/90 backdrop-blur-sm p-2 sm:p-4 flex items-center justify-between">
             <button
-              className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+              className="px-2 sm:px-4 py-1 sm:py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors text-sm sm:text-base"
               onClick={goToPreviousSlide}
               disabled={currentSlideIndex === 0}
             >
-              ← {t('slides.presentation.previous')}
+              ← <span className="hidden sm:inline">{t('slides.presentation.previous')}</span>
             </button>
-            <div className="text-white text-sm">
-              {t('slides.statusBar.slide')} {currentSlideIndex + 1} {t('slides.statusBar.of')} {slides.length}
+            <div className="text-white text-xs sm:text-sm">
+              {currentSlideIndex + 1} / {slides.length}
             </div>
             <button
-              className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+              className="px-2 sm:px-4 py-1 sm:py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors text-sm sm:text-base"
               onClick={goToNextSlide}
               disabled={currentSlideIndex === slides.length - 1}
             >
-              {t('slides.presentation.next')} →
+              <span className="hidden sm:inline">{t('slides.presentation.next')}</span> →
             </button>
           </div>
 
           {/* Exit Button */}
           <button
-            className="absolute top-4 right-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+            className="absolute top-2 sm:top-4 right-2 sm:right-4 px-2 sm:px-4 py-1 sm:py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-xs sm:text-base"
             onClick={exitPresentationMode}
           >
             {t('slides.presentation.exit')}
@@ -169,17 +169,17 @@ export default function Slides({ windowId: _windowId }: AppProps) {
       {/* Toolbar */}
       <OfficeToolbar buttons={toolbarButtons}>
         <div className="flex-1" />
-        <div className="text-sm text-gray-600">{fileName}</div>
+        <div className="text-xs sm:text-sm text-gray-600 truncate max-w-[100px] sm:max-w-none">{fileName}</div>
       </OfficeToolbar>
 
-      {/* Main Content */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Slide Thumbnails */}
-        <div className="w-48 bg-gray-100 border-r border-gray-300 overflow-y-auto p-2">
+      {/* Main Content - Stacked on mobile */}
+      <div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
+        {/* Slide Thumbnails - Horizontal on mobile, vertical on desktop */}
+        <div className="sm:w-48 bg-gray-100 border-b sm:border-b-0 sm:border-r border-gray-300 overflow-x-auto sm:overflow-y-auto p-2 flex sm:flex-col gap-2 sm:gap-0">
           {slides.map((slide, index) => (
             <div
               key={slide.id}
-              className={`mb-2 p-2 border-2 rounded cursor-pointer transition-colors ${
+              className={`flex-shrink-0 sm:flex-shrink sm:mb-2 p-2 border-2 rounded cursor-pointer transition-colors w-24 sm:w-auto ${
                 currentSlideIndex === index ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
               }`}
               onClick={() => setCurrentSlideIndex(index)}
@@ -189,28 +189,28 @@ export default function Slides({ windowId: _windowId }: AppProps) {
                 className="aspect-[16/9] bg-white rounded flex items-center justify-center text-xs text-gray-500 border border-gray-200"
                 style={{ backgroundColor: slide.background }}
               >
-                {slide.title}
+                <span className="truncate px-1">{slide.title}</span>
               </div>
             </div>
           ))}
         </div>
 
         {/* Slide Editor */}
-        <div className="flex-1 flex flex-col overflow-auto p-8 bg-gray-50">
+        <div className="flex-1 flex flex-col overflow-auto p-4 sm:p-8 bg-gray-50">
           <div className="max-w-5xl mx-auto w-full">
             <div
-              className="aspect-[16/9] bg-white rounded-lg shadow-lg p-8 md:p-12 flex flex-col"
+              className="aspect-[16/9] bg-white rounded-lg shadow-lg p-4 sm:p-8 md:p-12 flex flex-col"
               style={{ backgroundColor: currentSlide.background }}
             >
               <input
                 type="text"
-                className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 bg-transparent border-none outline-none placeholder-gray-400"
+                className="text-xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-3 sm:mb-6 bg-transparent border-none outline-none placeholder-gray-400"
                 placeholder="Slide Title"
                 value={slideTitle}
                 onChange={(e) => setSlideTitle(e.target.value)}
               />
               <textarea
-                className="flex-1 text-xl md:text-2xl text-gray-600 bg-transparent border-none outline-none resize-none placeholder-gray-400"
+                className="flex-1 text-sm sm:text-xl md:text-2xl text-gray-600 bg-transparent border-none outline-none resize-none placeholder-gray-400"
                 placeholder="Slide content..."
                 value={slideContent}
                 onChange={(e) => setSlideContent(e.target.value)}
@@ -219,8 +219,8 @@ export default function Slides({ windowId: _windowId }: AppProps) {
           </div>
         </div>
 
-        {/* Properties Panel */}
-        <div className="w-64 bg-gray-100 border-l border-gray-300 p-4 overflow-y-auto">
+        {/* Properties Panel - Hidden on mobile, shown on desktop or via toggle */}
+        <div className="hidden sm:block w-64 bg-gray-100 border-l border-gray-300 p-4 overflow-y-auto">
           <h3 className="text-sm font-semibold text-gray-700 mb-3">Slide Properties</h3>
           
           <div className="mb-4">
@@ -253,6 +253,39 @@ export default function Slides({ windowId: _windowId }: AppProps) {
               <option value="slide">{t('slides.transitions.slide')}</option>
             </select>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile Properties Bar - Only on mobile */}
+      <div className="sm:hidden bg-gray-100 border-t border-gray-300 p-2 flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-600">BG:</span>
+          <input
+            type="color"
+            className="w-8 h-6 rounded border border-gray-300"
+            value={currentSlide.background}
+            onChange={(e) => {
+              const newSlides = [...slides];
+              newSlides[currentSlideIndex].background = e.target.value;
+              setSlides(newSlides);
+            }}
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-600">Transition:</span>
+          <select
+            className="px-1 py-0.5 bg-white border border-gray-300 rounded text-xs"
+            value={currentSlide.transition}
+            onChange={(e) => {
+              const newSlides = [...slides];
+              newSlides[currentSlideIndex].transition = e.target.value as 'none' | 'fade' | 'slide';
+              setSlides(newSlides);
+            }}
+          >
+            <option value="none">{t('slides.transitions.none')}</option>
+            <option value="fade">{t('slides.transitions.fade')}</option>
+            <option value="slide">{t('slides.transitions.slide')}</option>
+          </select>
         </div>
       </div>
 
